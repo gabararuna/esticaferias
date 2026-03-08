@@ -1,0 +1,11 @@
+venv/
+.env
+__pycache__/
+*.pyc
+.streamlit/
+municipais.json
+municipios.csv
+feriados_municipais_novo.json
+test_mun.txt
+.gemini/
+.agents/
