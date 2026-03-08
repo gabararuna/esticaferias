@@ -314,7 +314,14 @@ if st.session_state['step'] == 1:
         
     with main_col:
         st.subheader("Configurações do Período")
-        # ... (rest of code stays the same)
+        
+        # Lógica de dependência de datas
+        def on_change_ini():
+            if not st.session_state.get('manual_end_date', False) and st.session_state.get('d_ini') is not None:
+                st.session_state['d_fim'] = st.session_state['d_ini'] + timedelta(days=365)
+
+        def on_change_fim():
+            st.session_state['manual_end_date'] = True
         d_ini = st.date_input("Início da busca", key="d_ini", on_change=on_change_ini, format="DD/MM/YYYY")
         d_fim = st.date_input("Fim da busca", key="d_fim", on_change=on_change_fim, format="DD/MM/YYYY")
         uf = st.selectbox("Estado", list(STATE_CITIES.keys()), index=9)
@@ -344,10 +351,30 @@ elif st.session_state['step'] == 2:
         render_adsense("banner_esq_step2", "vertical")
 
     with main_col:
-        st.subheader("Gerenciar Feriados")
-        # ... (code truncated)
+        st.write(f"Período: {conf['start'].strftime('%d/%m/%y')} a {conf['end'].strftime('%d/%m/%y')}")
+        
+        hols_raw = get_complete_holidays(conf['start'], conf['end'], conf['uf'], conf['city'])
+        df_hols = pd.DataFrame(hols_raw)
+        if not df_hols.empty:
+            # Feriados sem nome oficial (default "Feriado Municipal") começam desativados
+            df_hols['Ativo'] = df_hols['Nome'].apply(lambda x: x != "Feriado Municipal")
+            df_hols['Data_Show'] = df_hols['Data'].apply(lambda x: x.strftime('%d/%m/%y'))
+            disp_df = df_hols[['Data_Show', 'Tipo', 'Nome', 'Ativo']].copy()
+            disp_df.columns = ['Data', 'Tipo', 'Nome', 'Ativo']
+        else:
+            disp_df = pd.DataFrame(columns=['Data', 'Tipo', 'Nome', 'Ativo'])
+            
         edited = st.data_editor(disp_df, num_rows="dynamic", use_container_width=True, hide_index=True)
-        # ... (logic skip)
+        
+        st.session_state['feriados_final'] = {}
+        for i, row in edited.iterrows():
+            if row['Ativo']:
+                if isinstance(row['Data'], str):
+                    try: 
+                        d_obj = pd.to_datetime(row['Data'], dayfirst=True).date()
+                        st.session_state['feriados_final'][d_obj] = row['Nome']
+                    except: pass
+                else: st.session_state['feriados_final'][row['Data']] = row['Nome']
         col1, col2 = st.columns(2)
         if col1.button("Voltar", key="btn_voltar_2", use_container_width=True):
             st.session_state['step'] = 1
