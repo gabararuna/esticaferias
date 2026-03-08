@@ -30,14 +30,12 @@ st.markdown("""
             display: none !important;
             height: 0 !important;
         }
-        .ad-horizontal {
-            display: block !important;
-        }
     }
 
-    /* Esconder banner HORIZONTAL no desktop */
+    /* Banners Horizontais visíveis em todos os dispositivos */
     .ad-horizontal {
-        display: none;
+        display: block !important;
+        margin-bottom: 1rem !important;
     }
 
     /* Estilo dos containers centralizados */
@@ -305,6 +303,9 @@ def get_clt_lengths(saldo):
 
 # --- Interface ---
 
+# Banner Superior Universal (Antes de tudo)
+render_adsense("banner_topo_universal", "horizontal")
+
 st.title("🏖️ Estica Férias")
 
 if st.session_state['step'] == 1:
@@ -337,8 +338,8 @@ if st.session_state['step'] == 1:
                 st.session_state['step'] = 2
                 st.rerun()
         
-        # Banner horizontal mobile (visível apenas abaixo de 1150px via CSS)
-        render_adsense("banner_mobile_home", "horizontal")
+        # Banner horizontal (visível em todos os dispositivos)
+        render_adsense("banner_inferior_home", "horizontal")
 
     with ad_right:
         render_adsense("banner_dir_home", "vertical")
@@ -383,8 +384,8 @@ elif st.session_state['step'] == 2:
             st.session_state['step'] = 3
             st.rerun()
         
-        # Banner horizontal mobile
-        render_adsense("banner_mobile_step2", "horizontal")
+        # Banner horizontal inferior
+        render_adsense("banner_inferior_step2", "horizontal")
 
     with ad_right:
         render_adsense("banner_dir_step2", "vertical")
@@ -511,8 +512,8 @@ elif st.session_state['step'] == 3:
             st.session_state['saldo_ferias'] = total_days
             st.rerun()
 
-        # Banner horizontal mobile
-        render_adsense("banner_mobile_step3", "horizontal")
+        # Banner horizontal inferior
+        render_adsense("banner_inferior_step3", "horizontal")
 
     with ad_right:
         render_adsense("banner_dir_step3", "vertical")
