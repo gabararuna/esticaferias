@@ -286,8 +286,7 @@ def get_clt_lengths(saldo):
 
 # --- Interface ---
 
-# Banner Superior Universal (Antes de tudo)
-render_adsense("banner_topo_universal", "horizontal")
+# Banner Superior Universal (Removido - Redundante)
 
 st.title("🏖️ Estica Férias")
 
@@ -375,120 +374,114 @@ elif st.session_state['step'] == 3:
     if 'selected_ops' not in st.session_state:
         st.session_state['selected_ops'] = []
 
-    ad_left, main_col, ad_right = st.columns([12, 76, 12])
-    
-    with ad_left:
-        render_adsense("banner_esq_step3", "vertical")
+    # Banner Superior
+    render_adsense("banner_topo_step3")
 
-    with main_col:
-        st.subheader("Seleção de Períodos")
-        # Exibir saldo como usado/total
-        st.metric("Saldo Utilizado", f"{used_days}/{total_days} dias")
+    st.subheader("Seleção de Períodos")
+    # Exibir saldo como usado/total
+    st.metric("Saldo Utilizado", f"{used_days}/{total_days} dias")
 
-        # ---- Períodos já selecionados ----
-        if st.session_state['selected_ops']:
-            st.markdown("### Períodos Escolhidos")
-            for idx, sel in enumerate(st.session_state['selected_ops']):
-                sel_title = f"**Tirando {sel['length']} dias desde {sel['start'].strftime('%d/%m/%y')} você ganha +{sel['gain']} dias!**"
-                sel_ferias = f"Empresa: {sel['start'].strftime('%d/%m/%y')} - {sel['end'].strftime('%d/%m/%y')}"
-                sel_real = f"Real: {sel['v_start'].strftime('%d/%m/%y')} - {sel['v_end'].strftime('%d/%m/%y')}"
-                
-                c_sel, c_del = st.columns([5, 1])
-                with c_sel:
-                    st.markdown(f"""
-                    <div style="line-height: 1.4; margin-top: -5px;">
-                        <strong>Tirando {sel['length']} dias desde {sel['start'].strftime('%d/%m/%y')} você ganha +{sel['gain']} dias!</strong><br>
-                        <span style="font-size: 0.85rem; opacity: 0.7;">{sel_ferias}<br>{sel_real}</span>
-                    </div>
-                    """, unsafe_allow_html=True)
-                with c_del:
-                    if st.button("-", key=f"remove_op_{idx}", use_container_width=True):
-                        op_to_remove = st.session_state['selected_ops'].pop(idx)
-                        st.session_state['saldo_ferias'] += op_to_remove['length']
-                        st.rerun()
-            st.write("") 
+    # ---- Períodos já selecionados ----
+    if st.session_state['selected_ops']:
+        st.markdown("### Períodos Escolhidos")
+        for idx, sel in enumerate(st.session_state['selected_ops']):
+            sel_title = f"**Tirando {sel['length']} dias desde {sel['start'].strftime('%d/%m/%y')} você ganha +{sel['gain']} dias!**"
+            sel_ferias = f"Empresa: {sel['start'].strftime('%d/%m/%y')} - {sel['end'].strftime('%d/%m/%y')}"
+            sel_real = f"Real: {sel['v_start'].strftime('%d/%m/%y')} - {sel['v_end'].strftime('%d/%m/%y')}"
+            
+            c_sel, c_del = st.columns([5, 1])
+            with c_sel:
+                st.markdown(f"""
+                <div style="line-height: 1.4; margin-top: -5px;">
+                    <strong>Tirando {sel['length']} dias desde {sel['start'].strftime('%d/%m/%y')} você ganha +{sel['gain']} dias!</strong><br>
+                    <span style="font-size: 0.85rem; opacity: 0.7;">{sel_ferias}<br>{sel_real}</span>
+                </div>
+                """, unsafe_allow_html=True)
+            with c_del:
+                if st.button("-", key=f"remove_op_{idx}", use_container_width=True):
+                    op_to_remove = st.session_state['selected_ops'].pop(idx)
+                    st.session_state['saldo_ferias'] += op_to_remove['length']
+                    st.rerun()
+        st.write("") 
 
-        if saldo > 0:
-            with st.spinner("Buscando combinações mais eficientes..."):
-                rests = get_rest_days(conf['start'], conf['end'])
-                hols = st.session_state['feriados_final']
-                lens = get_clt_lengths(saldo)
-                
-                res = []
-                curr = conf['start']
-                while curr <= conf['end']:
-                    if is_valid_start(curr, hols, rests):
-                        for l in lens:
-                            if curr + timedelta(days=l-1) <= conf['end']:
-                                total, v_start, v_end = calc_gain(curr, l, hols, rests, conf['end'])
-                                # Evitar sobreposição
-                                overlap = any(not (v_end < r['v_start'] or v_start > r['v_end']) 
-                                             for r in st.session_state['selected_ops'])
-                                
-                                if not overlap:
-                                    res.append({
-                                        'start': curr, 'end': curr + timedelta(days=l-1),
-                                        'length': l, 'total': total, 'gain': total - l,
-                                        'efficiency': (total - l) / l,
-                                        'v_start': v_start, 'v_end': v_end
-                                    })
-                    curr += timedelta(days=1)
-                
-                res.sort(key=lambda x: (x['efficiency'], x['gain']), reverse=True)
-                
-                if not res:
-                    st.warning("Poxa! Nenhuma opção encontrada respeitando as regras da CLT para esse saldo.")
-                else:
-                    st.markdown("### Sugestões para seu saldo restante")
-                    for idx, op in enumerate(res[:12]):
-                        label_title = f"Tirando {op['length']} dias desde {op['start'].strftime('%d/%m/%y')} você ganha +{op['gain']} dias!"
-                        label_ferias = f"Empresa: {op['start'].strftime('%d/%m/%y')} a {op['end'].strftime('%d/%m/%y')}"
-                        label_real = f"Real: {op['v_start'].strftime('%d/%m/%y')} a {op['v_end'].strftime('%d/%m/%y')}"
-                        
-                        cols = st.columns([5, 1])
-                        with cols[0]:
-                            st.markdown(f"""
-                            <div style="line-height: 1.4; margin-top: -5px;">
-                                <strong>{label_title}</strong><br>
-                                <span style="font-size: 0.85rem; opacity: 0.7;">{label_ferias}<br>{label_real}</span>
-                            </div>
-                            """, unsafe_allow_html=True)
-                        with cols[1]:
-                            if st.button("+", key=f"sel_btn_{idx}_{op['start']}", use_container_width=True):
-                                st.session_state['selected_ops'].append(op)
-                                st.session_state['saldo_ferias'] -= op['length']
-                                st.rerun()
-                        st.write("") 
+    if saldo > 0:
+        with st.spinner("Buscando combinações mais eficientes..."):
+            rests = get_rest_days(conf['start'], conf['end'])
+            hols = st.session_state['feriados_final']
+            lens = get_clt_lengths(saldo)
+            
+            res = []
+            curr = conf['start']
+            while curr <= conf['end']:
+                if is_valid_start(curr, hols, rests):
+                    for l in lens:
+                        if curr + timedelta(days=l-1) <= conf['end']:
+                            total, v_start, v_end = calc_gain(curr, l, hols, rests, conf['end'])
+                            # Evitar sobreposição
+                            overlap = any(not (v_end < r['v_start'] or v_start > r['v_end']) 
+                                         for r in st.session_state['selected_ops'])
+                            
+                            if not overlap:
+                                res.append({
+                                    'start': curr, 'end': curr + timedelta(days=l-1),
+                                    'length': l, 'total': total, 'gain': total - l,
+                                    'efficiency': (total - l) / l,
+                                    'v_start': v_start, 'v_end': v_end
+                                })
+                curr += timedelta(days=1)
+            
+            res.sort(key=lambda x: (x['efficiency'], x['gain']), reverse=True)
+            
+            if not res:
+                st.warning("Poxa! Nenhuma opção encontrada respeitando as regras da CLT para esse saldo.")
+            else:
+                st.markdown("### Sugestões para seu saldo restante")
+                for idx, op in enumerate(res[:12]):
+                    label_title = f"Tirando {op['length']} dias desde {op['start'].strftime('%d/%m/%y')} você ganha +{op['gain']} dias!"
+                    label_ferias = f"Empresa: {op['start'].strftime('%d/%m/%y')} a {op['end'].strftime('%d/%m/%y')}"
+                    label_real = f"Real: {op['v_start'].strftime('%d/%m/%y')} a {op['v_end'].strftime('%d/%m/%y')}"
+                    
+                    cols = st.columns([5, 1])
+                    with cols[0]:
+                        st.markdown(f"""
+                        <div style="line-height: 1.4; margin-top: -5px;">
+                            <strong>{label_title}</strong><br>
+                            <span style="font-size: 0.85rem; opacity: 0.7;">{label_ferias}<br>{label_real}</span>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    with cols[1]:
+                        if st.button("+", key=f"sel_btn_{idx}_{op['start']}", use_container_width=True):
+                            st.session_state['selected_ops'].append(op)
+                            st.session_state['saldo_ferias'] -= op['length']
+                            st.rerun()
+                    st.write("") 
         
-        # Resumo Final
-        if st.session_state['selected_ops']:
-            st.write("") 
-            st.write("") 
-            st.subheader("🏖️ Itinerário Confirmado")
-            
-            t_spent = sum(r['length'] for r in st.session_state['selected_ops'])
-            t_total = sum(r['total'] for r in st.session_state['selected_ops'])
-            
-            st.info(f"✨ **Incrível!** Você usou **{t_spent} dias** do seu saldo para garantir **{t_total} dias** de folga real!")
-            
-            itinerario_data = [{
-                "Empresa": f"{r['start'].strftime('%d/%m/%y')} - {r['end'].strftime('%d/%m/%y')}",
-                "Férias": f"{r['length']}d",
-                "Real": f"{r['v_start'].strftime('%d/%m/%y')} a {r['v_end'].strftime('%d/%m/%y')}",
-                "Folga": f"{r['total']}d",
-                "Ganho": f"+{r['gain']}d"
-            } for r in sorted(st.session_state['selected_ops'], key=lambda k: k['start'])]
-            st.table(itinerario_data)
-            
-        if st.button("Reiniciar Planejamento", key="restart_all", use_container_width=True):
-            st.session_state['step'] = 1
-            st.session_state['selected_ops'] = []
-            st.session_state['saldo_ferias'] = total_days
-            st.rerun()
+    # Resumo Final
+    if st.session_state['selected_ops']:
+        st.write("") 
+        st.write("") 
+        st.subheader("🏖️ Itinerário Confirmado")
+        
+        t_spent = sum(r['length'] for r in st.session_state['selected_ops'])
+        t_total = sum(r['total'] for r in st.session_state['selected_ops'])
+        
+        st.info(f"✨ **Incrível!** Você usou **{t_spent} dias** do seu saldo para garantir **{t_total} dias** de folga real!")
+        
+        itinerario_data = [{
+            "Empresa": f"{r['start'].strftime('%d/%m/%y')} - {r['end'].strftime('%d/%m/%y')}",
+            "Férias": f"{r['length']}d",
+            "Real": f"{r['v_start'].strftime('%d/%m/%y')} a {r['v_end'].strftime('%d/%m/%y')}",
+            "Folga": f"{r['total']}d",
+            "Ganho": f"+{r['gain']}d"
+        } for r in sorted(st.session_state['selected_ops'], key=lambda k: k['start'])]
+        st.table(itinerario_data)
+        
+    if st.button("Reiniciar Planejamento", key="restart_all", use_container_width=True):
+        st.session_state['step'] = 1
+        st.session_state['selected_ops'] = []
+        st.session_state['saldo_ferias'] = total_days
+        st.rerun()
 
-        # Banner horizontal inferior
-        render_adsense("banner_inferior_step3", "horizontal")
-
-    with ad_right:
-        render_adsense("banner_dir_step3", "vertical")
+    # Banner inferior
+    render_adsense("banner_inferior_step3")
 
