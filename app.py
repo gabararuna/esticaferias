@@ -17,24 +17,17 @@ st.markdown("""
         --vivid-hover: #3498DB;
     }
     
-    /* Container Principal */
+    /* Container Principal centralizado */
     .block-container {
         padding-top: 1rem !important;
         padding-bottom: 2rem !important;
-        max-width: 1300px !important; /* Aumentado para comportar os banners laterais */
-    }
-
-    /* Ocultar banners VERTICAIS em telas menores que 1150px */
-    @media (max-width: 1150px) {
-        .ad-vertical {
-            display: none !important;
-            height: 0 !important;
-        }
+        max-width: 1000px !important;
     }
 
     /* Banners Horizontais visíveis em todos os dispositivos */
     .ad-horizontal {
         display: block !important;
+        margin-top: 1rem !important;
         margin-bottom: 1rem !important;
     }
 
@@ -95,24 +88,14 @@ if 'd_fim' not in st.session_state:
     st.session_state['d_fim'] = date.today() + timedelta(days=365)
 
 # --- Função de Anúncios ---
-def render_adsense(ad_id="placeholder", ad_type="vertical"):
+def render_adsense(ad_id="placeholder"):
     """
-    Renderiza o bloco de anúncios do Google Adsense.
-    - vertical: Skycraper (160x600)
-    - horizontal: Banner (padrão responsivo)
+    Renderiza um bloco de anúncio horizontal (Banner).
     """
-    if ad_type == "vertical":
-        w, h = "160px", "600px"
-        div_class = "ad-vertical"
-        # Skycraper style
-        ins_style = f"display:inline-block;width:{w};height:{h};background:rgba(255,255,255,0.05);border-radius:8px;"
-        fallback_style = f"width: {w}; height: {h}; background: linear-gradient(180deg, rgba(46,134,193,0.1) 0%, rgba(0,0,0,0) 100%);"
-    else:
-        w, h = "100%", "100px"
-        div_class = "ad-horizontal"
-        # horizontal style
-        ins_style = f"display:block;width:{w};height:{h};background:rgba(255,255,255,0.05);border-radius:8px;"
-        fallback_style = f"width: {w}; height: {h}; background: linear-gradient(90deg, rgba(46,134,193,0.1) 0%, rgba(0,0,0,0) 100%);"
+    w, h = "100%", "100px"
+    div_class = "ad-horizontal"
+    ins_style = f"display:block;width:{w};height:{h};background:rgba(255,255,255,0.05);border-radius:8px;"
+    fallback_style = f"width: {w}; height: {h}; background: linear-gradient(90deg, rgba(46,134,193,0.1) 0%, rgba(0,0,0,0) 100%);"
 
     html_code = f"""
     <div class="{div_class}" style="width: {w}; margin: auto; position: relative; overflow: hidden; border-radius: 8px;">
@@ -135,7 +118,7 @@ def render_adsense(ad_id="placeholder", ad_type="vertical"):
                     display: flex; flex-direction: column; align-items: center; justify-content: center;
                     color: #aaa; font-family: sans-serif; pointer-events: none; text-align: center;">
             <div style="font-weight: bold; color: #2E86C1; font-size: 13px;">Google Ads</div>
-            <div style="font-size: 9px; opacity: 0.6;">{ad_type.upper()} TEST MODE</div>
+            <div style="font-size: 9px; opacity: 0.6;">HORIZONTAL TEST MODE</div>
         </div>
     </div>
     """
@@ -309,86 +292,77 @@ render_adsense("banner_topo_universal", "horizontal")
 st.title("🏖️ Estica Férias")
 
 if st.session_state['step'] == 1:
-    ad_left, main_col, ad_right = st.columns([12, 76, 12])
-    with ad_left:
-        render_adsense("banner_esq_home", "vertical")
-        
-    with main_col:
-        st.subheader("Configurações do Período")
-        
-        # Lógica de dependência de datas
-        def on_change_ini():
-            if not st.session_state.get('manual_end_date', False) and st.session_state.get('d_ini') is not None:
-                st.session_state['d_fim'] = st.session_state['d_ini'] + timedelta(days=365)
+    # Banner Superior (abaixo do titulo principal)
+    render_adsense("banner_topo_home")
+    
+    st.subheader("Configurações do Período")
+    
+    # Lógica de dependência de datas
+    def on_change_ini():
+        if not st.session_state.get('manual_end_date', False) and st.session_state.get('d_ini') is not None:
+            st.session_state['d_fim'] = st.session_state['d_ini'] + timedelta(days=365)
 
-        def on_change_fim():
-            st.session_state['manual_end_date'] = True
-        d_ini = st.date_input("Início da busca", key="d_ini", on_change=on_change_ini, format="DD/MM/YYYY")
-        d_fim = st.date_input("Fim da busca", key="d_fim", on_change=on_change_fim, format="DD/MM/YYYY")
-        uf = st.selectbox("Estado", list(STATE_CITIES.keys()), index=9)
-        cities = STATE_CITIES[uf]
-        cid = st.selectbox("Cidade", cities, index=0)
-        total = st.number_input("Saldo de dias de férias", 5, 30, 30)
-        st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("Avançar Etapa", type="primary", use_container_width=True):
-            if d_fim <= d_ini: st.error("Data final deve ser após a inicial.")
-            else:
-                st.session_state['config_base'] = {'start': d_ini, 'end': d_fim, 'uf': uf, 'city': cid, 'total': total}
-                st.session_state['saldo_ferias'] = total
-                st.session_state['step'] = 2
-                st.rerun()
-        
-        # Banner horizontal (visível em todos os dispositivos)
-        render_adsense("banner_inferior_home", "horizontal")
-
-    with ad_right:
-        render_adsense("banner_dir_home", "vertical")
+    def on_change_fim():
+        st.session_state['manual_end_date'] = True
+    d_ini = st.date_input("Início da busca", key="d_ini", on_change=on_change_ini, format="DD/MM/YYYY")
+    d_fim = st.date_input("Fim da busca", key="d_fim", on_change=on_change_fim, format="DD/MM/YYYY")
+    uf = st.selectbox("Estado", list(STATE_CITIES.keys()), index=9)
+    cities = STATE_CITIES[uf]
+    cid = st.selectbox("Cidade", cities, index=0)
+    total = st.number_input("Saldo de dias de férias", 5, 30, 30)
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("Avançar Etapa", type="primary", use_container_width=True):
+        if d_fim <= d_ini: st.error("Data final deve ser após a inicial.")
+        else:
+            st.session_state['config_base'] = {'start': d_ini, 'end': d_fim, 'uf': uf, 'city': cid, 'total': total}
+            st.session_state['saldo_ferias'] = total
+            st.session_state['step'] = 2
+            st.rerun()
+    
+    # Banner inferior
+    render_adsense("banner_inferior_home")
 
 elif st.session_state['step'] == 2:
     conf = st.session_state['config_base']
-    ad_left, main_col, ad_right = st.columns([12, 76, 12])
     
-    with ad_left:
-        render_adsense("banner_esq_step2", "vertical")
-
-    with main_col:
-        st.write(f"Período: {conf['start'].strftime('%d/%m/%y')} a {conf['end'].strftime('%d/%m/%y')}")
+    # Banner Superior
+    render_adsense("banner_topo_step2")
+    
+    st.subheader("Gerenciar Feriados")
+    st.write(f"Período: {conf['start'].strftime('%d/%m/%y')} a {conf['end'].strftime('%d/%m/%y')}")
+    
+    hols_raw = get_complete_holidays(conf['start'], conf['end'], conf['uf'], conf['city'])
+    df_hols = pd.DataFrame(hols_raw)
+    if not df_hols.empty:
+        # Feriados sem nome oficial (default "Feriado Municipal") começam desativados
+        df_hols['Ativo'] = df_hols['Nome'].apply(lambda x: x != "Feriado Municipal")
+        df_hols['Data_Show'] = df_hols['Data'].apply(lambda x: x.strftime('%d/%m/%y'))
+        disp_df = df_hols[['Data_Show', 'Tipo', 'Nome', 'Ativo']].copy()
+        disp_df.columns = ['Data', 'Tipo', 'Nome', 'Ativo']
+    else:
+        disp_df = pd.DataFrame(columns=['Data', 'Tipo', 'Nome', 'Ativo'])
         
-        hols_raw = get_complete_holidays(conf['start'], conf['end'], conf['uf'], conf['city'])
-        df_hols = pd.DataFrame(hols_raw)
-        if not df_hols.empty:
-            # Feriados sem nome oficial (default "Feriado Municipal") começam desativados
-            df_hols['Ativo'] = df_hols['Nome'].apply(lambda x: x != "Feriado Municipal")
-            df_hols['Data_Show'] = df_hols['Data'].apply(lambda x: x.strftime('%d/%m/%y'))
-            disp_df = df_hols[['Data_Show', 'Tipo', 'Nome', 'Ativo']].copy()
-            disp_df.columns = ['Data', 'Tipo', 'Nome', 'Ativo']
-        else:
-            disp_df = pd.DataFrame(columns=['Data', 'Tipo', 'Nome', 'Ativo'])
-            
-        edited = st.data_editor(disp_df, num_rows="dynamic", use_container_width=True, hide_index=True)
-        
-        st.session_state['feriados_final'] = {}
-        for i, row in edited.iterrows():
-            if row['Ativo']:
-                if isinstance(row['Data'], str):
-                    try: 
-                        d_obj = pd.to_datetime(row['Data'], dayfirst=True).date()
-                        st.session_state['feriados_final'][d_obj] = row['Nome']
-                    except: pass
-                else: st.session_state['feriados_final'][row['Data']] = row['Nome']
-        col1, col2 = st.columns(2)
-        if col1.button("Voltar", key="btn_voltar_2", use_container_width=True):
-            st.session_state['step'] = 1
-            st.rerun()
-        if col2.button("Avançar Etapa", key="btn_avancar_2", type="primary", use_container_width=True):
-            st.session_state['step'] = 3
-            st.rerun()
-        
-        # Banner horizontal inferior
-        render_adsense("banner_inferior_step2", "horizontal")
-
-    with ad_right:
-        render_adsense("banner_dir_step2", "vertical")
+    edited = st.data_editor(disp_df, num_rows="dynamic", use_container_width=True, hide_index=True)
+    
+    st.session_state['feriados_final'] = {}
+    for i, row in edited.iterrows():
+        if row['Ativo']:
+            if isinstance(row['Data'], str):
+                try: 
+                    d_obj = pd.to_datetime(row['Data'], dayfirst=True).date()
+                    st.session_state['feriados_final'][d_obj] = row['Nome']
+                except: pass
+            else: st.session_state['feriados_final'][row['Data']] = row['Nome']
+    col1, col2 = st.columns(2)
+    if col1.button("Voltar", key="btn_voltar_2", use_container_width=True):
+        st.session_state['step'] = 1
+        st.rerun()
+    if col2.button("Avançar Etapa", key="btn_avancar_2", type="primary", use_container_width=True):
+        st.session_state['step'] = 3
+        st.rerun()
+    
+    # Banner inferior
+    render_adsense("banner_inferior_step2")
 
 elif st.session_state['step'] == 3:
     # Configurações para a etapa 3
