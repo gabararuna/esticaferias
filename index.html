@@ -4,57 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estica Férias: Otimizando suas folgas!</title>
-
-    <meta name="google-adsense-account" content="ca-pub-4059018857698196">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4059018857698196"
-     crossorigin="anonymous"></script>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4059018857698196" crossorigin="anonymous"></script>
 
     <style>
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            height: 100%; 
-            width: 100%; 
-            overflow: hidden; 
-            background-color: #0E1117; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        :root { --bg-color: #0E1117; --text-color: #ffffff; }
+        body { 
+            margin: 0; padding: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-color);
+            font-family: sans-serif;
+            display: flex; flex-direction: column; height: 100vh;
         }
 
-        .app-container {
-            width: 96%;  
-            height: 94%; 
+        /* Área de conteúdo para o Google ler */
+        header { padding: 20px; text-align: center; }
+        .seo-content { max-width: 800px; margin: 0 auto; line-height: 1.6; color: #aaa; font-size: 14px; }
+
+        /* Espaço para Anúncio no Topo */
+        .ad-slot-top { width: 100%; text-align: center; margin-bottom: 10px; min-height: 90px; }
+
+        /* Container do App com o recorte que você gostou */
+        .app-main {
+            flex-grow: 1; /* Ocupa o espaço restante */
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; padding-bottom: 20px;
+        }
+        .app-wrapper {
+            width: 96%; height: 100%;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             border-radius: 12px;
-            overflow: hidden; /* Recorta o iframe que vai "vazar" 2px para fora */
-            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        iframe {
+            position: absolute;
+            top: -45px; left: -2px;
+            width: calc(100% + 4px); height: calc(100% + 90px);
+            border: none;
         }
 
-        iframe { 
-            position: absolute;
-            /* Recorte Superior/Inferior: -45px */
-            top: -45px; 
-            height: calc(100% + 90px); 
-            
-            /* Recorte Lateral: -2px para esconder a borda branca lateral */
-            left: -2px; 
-            width: calc(100% + 4px); 
-            
-            border: none;
-            display: block;
-        }
+        footer { padding: 10px; text-align: center; font-size: 12px; color: #555; }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <iframe 
-            src="https://esticaferias.streamlit.app/?embed=true" 
-            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-            sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-            allowfullscreen>
-        </iframe>
+
+    <header>
+        <h1>Estica Férias</h1>
+        <div class="seo-content">
+            <p>Bem-vindo ao <strong>Estica Férias</strong>, sua ferramenta definitiva para otimização de folgas no Brasil. 
+            Utilize nosso simulador inteligente para calcular como emendar feriados e maximizar seu descanso em 2026. 
+            Planeje suas viagens com base no calendário oficial de feriados nacionais e estaduais.</p>
+        </div>
+    </header>
+
+    <div class="ad-slot-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4059018857698196"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
+
+    <main class="app-main">
+        <div class="app-wrapper">
+            <iframe src="https://esticaferias.streamlit.app/?embed=true" 
+                    allowfullscreen 
+                    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads">
+            </iframe>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Gabriel Araruna - <a href="/privacidade" style="color:#777;">Política de Privacidade</a></p>
+    </footer>
+
 </body>
 </html>
