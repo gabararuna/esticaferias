@@ -18,13 +18,21 @@
             overflow: hidden; /* Evita rolagem dupla no site pai */
         }
 
-        /* Área de conteúdo para o Google ler (SEO) */
-        header { padding: 15px 20px; text-align: center; flex-shrink: 0; }
-        header h1 { margin: 0 0 5px 0; font-size: 24px; }
-        .seo-content { max-width: 800px; margin: 0 auto; line-height: 1.4; color: #aaa; font-size: 13px; }
+        /* Cabeçalho mais compacto */
+        header { padding: 10px 15px; text-align: center; flex-shrink: 0; }
+        header h1 { margin: 0 0 5px 0; font-size: 20px; } /* Fonte levemente menor */
+        .seo-content { max-width: 800px; margin: 0 auto; line-height: 1.3; color: #aaa; font-size: 12px; }
 
-        /* Espaço para Anúncio no Topo */
-        .ad-slot-top { width: 100%; text-align: center; margin-bottom: 5px; min-height: 90px; flex-shrink: 0; }
+        /* Espaço para Anúncio no Topo - ALTURA TRAVADA */
+        .ad-slot-top { 
+            width: 100%; 
+            text-align: center; 
+            margin-bottom: 5px; 
+            min-height: 50px; 
+            max-height: 90px; /* Impede o anúncio de engolir a tela */
+            flex-shrink: 0; 
+            overflow: hidden; /* Corta qualquer anúncio teimoso que tente passar de 90px */
+        }
 
         /* Container do App - Centralizado e Recortado */
         .app-main {
@@ -36,21 +44,16 @@
             width: 96%; height: 100%;
             position: relative;
             border-radius: 12px;
-            overflow: hidden; /* Recorta o iframe que vai vazar 2px pro lado */
+            overflow: hidden; 
             border: 1px solid rgba(255,255,255,0.1);
         }
         
         iframe {
             position: absolute;
-            
-            /* Recorte Vertical: sobe 2px e estica 14px (2px do topo + 12px do rodapé) */
             top: -2px; 
-            height: calc(100% + 28px); 
-            
-            /* Recorte Lateral: esconde 2px de cada lado */
             left: -2px; 
             width: calc(100% + 4px); 
-            
+            height: calc(100% + 14px); 
             border: none;
             display: block;
         }
@@ -63,16 +66,16 @@
     <header>
         <h1>Estica Férias</h1>
         <div class="seo-content">
-            <p>Sua ferramenta para otimização de folgas no Brasil. Utilize nosso simulador para calcular como maximizar seu descanso. v.0.1.2</p>
+            <p>Sua ferramenta para otimização de folgas no Brasil. Utilize nosso simulador inteligente para calcular como maximizar seu descanso.</p>
         </div>
     </header>
 
     <div class="ad-slot-top">
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:block; max-height: 90px;"
              data-ad-client="ca-pub-4059018857698196"
              data-ad-slot="AUTO"
-             data-ad-format="auto"
+             data-ad-format="horizontal"
              data-full-width-responsive="true"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
