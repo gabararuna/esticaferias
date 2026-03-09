@@ -16,7 +16,6 @@
             overflow: hidden; 
             background-color: #0E1117; 
         }
-        /* Ajuste para o iframe ocupar 100% sem bordas */
         iframe { 
             position: absolute; 
             top: 0; 
@@ -30,8 +29,10 @@
 </head>
 <body>
     <iframe 
-        src="https://esticaferias.streamlit.app/?embed=true&embed_options=disable_scrolling" 
-        allow="fullscreen">
+        src="https://esticaferias.streamlit.app/?embed=true" 
+        allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+        allowfullscreen>
     </iframe>
 </body>
 </html>
