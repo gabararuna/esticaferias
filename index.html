@@ -15,36 +15,43 @@
             color: var(--text-color);
             font-family: sans-serif;
             display: flex; flex-direction: column; height: 100vh;
+            overflow: hidden; /* Evita rolagem dupla no site pai */
         }
 
-        /* Área de conteúdo para o Google ler */
-        header { padding: 20px; text-align: center; }
-        .seo-content { max-width: 800px; margin: 0 auto; line-height: 1.6; color: #aaa; font-size: 14px; }
+        /* Área de conteúdo para o Google ler (SEO) */
+        header { padding: 15px 20px; text-align: center; flex-shrink: 0; }
+        header h1 { margin: 0 0 5px 0; font-size: 24px; }
+        .seo-content { max-width: 800px; margin: 0 auto; line-height: 1.4; color: #aaa; font-size: 13px; }
 
         /* Espaço para Anúncio no Topo */
-        .ad-slot-top { width: 100%; text-align: center; margin-bottom: 10px; min-height: 90px; }
+        .ad-slot-top { width: 100%; text-align: center; margin-bottom: 5px; min-height: 90px; flex-shrink: 0; }
 
-        /* Container do App com o recorte que você gostou */
+        /* Container do App - Centralizado e Recortado */
         .app-main {
             flex-grow: 1; /* Ocupa o espaço restante */
             display: flex; justify-content: center; align-items: center;
-            overflow: hidden; padding-bottom: 20px;
+            overflow: hidden; padding-bottom: 10px;
         }
         .app-wrapper {
             width: 96%; height: 100%;
             position: relative;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: hidden; /* Recorta o iframe que vai vazar 2px pro lado */
             border: 1px solid rgba(255,255,255,0.1);
         }
+        
+        /* CORREÇÃO AQUI */
         iframe {
             position: absolute;
-            top: -45px; left: -2px;
-            width: calc(100% + 4px); height: calc(100% + 90px);
+            top: 0; /* Zeramos o deslocamento superior para não cortar o app limpo */
+            left: -2px; /* Mantemos o recorte lateral para esconder linhas brancas */
+            width: calc(100% + 4px); 
+            height: 100%; /* Ajustamos a altura para 100% do container */
             border: none;
+            display: block;
         }
 
-        footer { padding: 10px; text-align: center; font-size: 12px; color: #555; }
+        footer { padding: 5px; text-align: center; font-size: 11px; color: #555; flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -52,9 +59,8 @@
     <header>
         <h1>Estica Férias</h1>
         <div class="seo-content">
-            <p>Bem-vindo ao <strong>Estica Férias</strong>, sua ferramenta definitiva para otimização de folgas no Brasil. 
-            Utilize nosso simulador inteligente para calcular como emendar feriados e maximizar seu descanso em 2026. 
-            Planeje suas viagens com base no calendário oficial de feriados nacionais e estaduais.</p>
+            <p>Bem-vindo ao <strong>Estica Férias</strong>, sua ferramenta para otimização de folgas no Brasil. 
+            Utilize nosso simulador inteligente para calcular como emendar feriados e maximizar seu descanso.</p>
         </div>
     </header>
 
