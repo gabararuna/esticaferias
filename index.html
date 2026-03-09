@@ -8,38 +8,38 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SUBSTITUA_PELO_SEU_ID" crossorigin="anonymous"></script>
 
     <style>
-        /* Configura o fundo para usar a cor escura do Streamlit e centralizar o app */
         body, html { 
             margin: 0; 
             padding: 0; 
             height: 100%; 
             width: 100%; 
             overflow: hidden; 
-            background-color: #0E1117; /* Cor escura do Streamlit */
+            background-color: #0E1117; 
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* O container cria o "respiro" externo (espaço escuro em volta do app) */
         .app-container {
-            width: 96%;  /* Largura visível do app (96% da tela, deixa 2% de respiro em cada lado) */
-            height: 94%; /* Altura visível do app (94% da tela, deixa 3% de respiro em cima/baixo) */
+            width: 96%;  
+            height: 94%; 
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); /* Sombra para profundidade */
-            border-radius: 12px; /* Arredonda levemente os cantos do app */
-            overflow: hidden; /* CRUCIAL: Recorta o que estiver fora desta caixa */
-            border: 1px solid rgba(255,255,255,0.1); /* Borda fina escura para definição */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border-radius: 12px;
+            overflow: hidden; /* Recorta o iframe que vai "vazar" 2px para fora */
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* O truque do recorte: fazemos o iframe ser maior que o container
-           para que as bordas brancas nativas do Streamlit Cloud fiquem escondidas. */
         iframe { 
             position: absolute;
-            top: -45px; /* Empurra o header branco superior para fora da área visível */
-            left: 0; 
-            width: 100%; 
-            height: calc(100% + 90px); /* Compensa o deslocamento para que o rodapé branco também suma embaixo */
+            /* Recorte Superior/Inferior: -45px */
+            top: -45px; 
+            height: calc(100% + 90px); 
+            
+            /* Recorte Lateral: -2px para esconder a borda branca lateral */
+            left: -2px; 
+            width: calc(100% + 4px); 
+            
             border: none;
             display: block;
         }
