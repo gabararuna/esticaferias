@@ -3,16 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estica Férias: Otimizando o seu descanso!</title>
-
+    <title>Estica Férias: Otimizando suas folgas!</title>
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SUBSTITUA_PELO_SEU_ID" crossorigin="anonymous"></script>
 
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #0E1117; }
-        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; 
+            background-color: #0E1117; 
+        }
+        /* Ajuste para o iframe ocupar 100% sem bordas */
+        iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            border: none;
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <iframe src="https://esticaferias.streamlit.app/?embed=true"></iframe>
+    <iframe 
+        src="https://esticaferias.streamlit.app/?embed=true&embed_options=disable_scrolling" 
+        allow="fullscreen">
+    </iframe>
 </body>
 </html>
