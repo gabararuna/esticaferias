@@ -8,27 +8,38 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-SUBSTITUA_PELO_SEU_ID" crossorigin="anonymous"></script>
 
     <style>
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            height: 100%; 
-            width: 100%; 
-            overflow: hidden; 
-            background-color: #0E1117; /* Cor escura do Streamlit */
-        }
+    body, html { 
+        margin: 0; 
+        padding: 0; 
+        height: 100%; 
+        width: 100%; 
+        overflow: hidden; 
+        background-color: #0E1117; 
+    }
 
-        /* O truque: fazemos o iframe ser ligeiramente maior que a tela 
-           para esconder o header e o footer brancos do Streamlit Cloud */
-        iframe { 
-            position: absolute; 
-            top: -45px; /* Empurra a barra branca superior para fora */
-            left: 0; 
-            width: 100%; 
-            height: calc(100% + 90px); /* Compensa o deslocamento para o rodapé sumir também */
-            border: none;
-            display: block;
-        }
-    </style>
+    iframe { 
+        position: absolute; 
+        /* Esconde o topo e compensa a lateral esquerda */
+        top: -45px; 
+        left: -5%; 
+        
+        /* Faz o iframe ser maior que a janela para as bordas ficarem "fora" */
+        width: 110%; 
+        height: calc(100% + 90px); 
+        
+        border: none;
+        display: block;
+    }
+</style>
+
+<body>
+    <iframe 
+        src="https://esticaferias.streamlit.app/?embed=true" 
+        allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+        allowfullscreen>
+    </iframe>
+</body>
 </head>
 <body>
     <iframe 
