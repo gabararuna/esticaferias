@@ -35,13 +35,13 @@ st.markdown("""
         margin-bottom: 0.5rem !important;
     }
 
-    /* Botões de Ação - Ajustados para funcionarem como Cards */
+    /* Botões de Ação - Ajustados para funcionarem como Cards Limpos */
     .stButton>button[kind="primary"], .stButton>button[kind="secondary"] {
         padding: 0.8rem 1rem !important;
         font-weight: 600 !important;
         border-radius: 8px !important;
         transition: all 0.2s ease-in-out !important;
-        height: auto !important; /* Permite múltiplas linhas de texto */
+        height: auto !important;
     }
     .stButton>button[kind="primary"] {
         background-color: var(--vivid-action) !important;
@@ -299,14 +299,13 @@ elif st.session_state['step'] == 3:
     st.subheader("Seleção de Períodos")
     st.metric("Saldo Utilizado", f"{used_days}/{total_days} dias")
 
-    # ---- Períodos já selecionados (Cards Clicáveis) ----
+    # ---- Períodos já selecionados (Cards Clicáveis Limpos) ----
     if st.session_state['selected_ops']:
         st.markdown("### Períodos Escolhidos")
         for idx, sel in enumerate(st.session_state['selected_ops']):
-            # O texto usa \n para quebrar a linha dentro do botão
-            label_btn = f"✅ Tirando {sel['length']} dias em {sel['start'].strftime('%d/%m/%y')} (+{sel['gain']} dias de ganho)\nFolga real: {sel['v_start'].strftime('%d/%m/%y')} a {sel['v_end'].strftime('%d/%m/%y')} (Clique para remover)"
+            # Texto limpo sem emojis ou quebras
+            label_btn = f"Tirando {sel['length']} dias em {sel['start'].strftime('%d/%m/%y')} você folga {sel['total']} dias!"
             
-            # O botão inteiro age como o removedor
             if st.button(label_btn, key=f"remove_op_{idx}", use_container_width=True):
                 op_to_remove = st.session_state['selected_ops'].pop(idx)
                 st.session_state['saldo_ferias'] += op_to_remove['length']
@@ -345,10 +344,9 @@ elif st.session_state['step'] == 3:
             else:
                 st.markdown("### Sugestões para seu saldo restante")
                 for idx, op in enumerate(res[:12]):
-                    # Texto limpo com quebra de linha para formar o Card
-                    label_btn = f"🗓️ {op['length']} dias em {op['start'].strftime('%d/%m/%y')} ➔ Folga de {op['total']} dias!\nReal: {op['v_start'].strftime('%d/%m/%y')} a {op['v_end'].strftime('%d/%m/%y')} (Clique para adicionar)"
+                    # Texto limpo sem emojis ou quebras
+                    label_btn = f"Tirando {op['length']} dias em {op['start'].strftime('%d/%m/%y')} você folga {op['total']} dias!"
                     
-                    # O botão inteiro age como adicionador
                     if st.button(label_btn, key=f"sel_btn_{idx}_{op['start']}", use_container_width=True):
                         st.session_state['selected_ops'].append(op)
                         st.session_state['saldo_ferias'] -= op['length']
