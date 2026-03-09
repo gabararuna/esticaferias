@@ -40,13 +40,17 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
         
-        /* CORREÇÃO AQUI */
         iframe {
             position: absolute;
-            top: 0; /* Zeramos o deslocamento superior para não cortar o app limpo */
-            left: -2px; /* Mantemos o recorte lateral para esconder linhas brancas */
+            
+            /* Recorte Vertical: sobe 2px e estica 14px (2px do topo + 12px do rodapé) */
+            top: -2px; 
+            height: calc(100% + 14px); 
+            
+            /* Recorte Lateral: esconde 2px de cada lado */
+            left: -2px; 
             width: calc(100% + 4px); 
-            height: 100%; /* Ajustamos a altura para 100% do container */
+            
             border: none;
             display: block;
         }
