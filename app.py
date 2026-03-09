@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import holidays
 from datetime import date, timedelta
+import json
+import os
 
 # --- Configuração da Página ---
 st.set_page_config(page_title="Estica Férias", page_icon="🏖️", layout="wide")
@@ -9,7 +11,6 @@ st.set_page_config(page_title="Estica Férias", page_icon="🏖️", layout="wid
 # --- Estilo Glassmorfismo e Cores (Vivid/Moderno/Polido) ---
 st.markdown("""
 <style>
-    /* Suporte a Dark/Light Mode dinâmico */
     :root {
         --glass-bg: rgba(255, 255, 255, 0.06);
         --glass-border: rgba(255, 255, 255, 0.2);
@@ -17,14 +18,12 @@ st.markdown("""
         --vivid-hover: #3498DB;
     }
     
-    /* Container Principal centralizado */
     .block-container {
         padding-top: 1rem !important;
         padding-bottom: 2rem !important;
         max-width: 1000px !important;
     }
 
-    /* Estilo dos containers centralizados */
     div[data-testid="stVerticalBlock"] > div > div.stBox, 
     div.stExpander, div[data-testid="stMetric"], .stDataEditor {
         background-color: var(--glass-bg) !important;
@@ -36,12 +35,13 @@ st.markdown("""
         margin-bottom: 0.5rem !important;
     }
 
-    /* Botões de Ação Vividos e Padronizados */
+    /* Botões de Ação - Ajustados para funcionarem como Cards */
     .stButton>button[kind="primary"], .stButton>button[kind="secondary"] {
-        padding: 0.6rem 1.5rem !important;
-        font-weight: 700 !important;
+        padding: 0.8rem 1rem !important;
+        font-weight: 600 !important;
         border-radius: 8px !important;
         transition: all 0.2s ease-in-out !important;
+        height: auto !important; /* Permite múltiplas linhas de texto */
     }
     .stButton>button[kind="primary"] {
         background-color: var(--vivid-action) !important;
@@ -53,14 +53,14 @@ st.markdown("""
     }
     .stButton>button:hover {
         transform: translateY(-2px);
+        border-color: var(--vivid-hover) !important;
     }
     
-    /* Espaçamento das métricas */
     div[data-testid="stMetricValue"] {
         font-size: 1.1rem !important;
     }
     
-    /* Esconder o Header/Footer padrão do Streamlit para encaixar no Iframe */
+    /* Esconder o Header/Footer padrão do Streamlit */
     header {visibility: hidden;}
     footer {visibility: hidden;}
 </style>
@@ -83,9 +83,6 @@ if 'd_ini' not in st.session_state:
     st.session_state['d_ini'] = date.today()
 if 'd_fim' not in st.session_state:
     st.session_state['d_fim'] = date.today() + timedelta(days=365)
-
-import json
-import os
 
 # --- Cidades (Carregamento Dinâmico) ---
 @st.cache_data
@@ -111,9 +108,7 @@ STATE_CITIES = load_cities()
 MUNICIPAL_HOLS = load_municipal_holidays_v3()
 
 # --- Funções Lógicas ---
-
 def get_easter(year):
-    """Cálculo da Páscoa (Meeus/Jones/Butcher)."""
     a, b = year % 19, year // 100
     c, d, e = year % 100, b // 4, b % 4
     f = (b + 8) // 25
@@ -127,7 +122,6 @@ def get_easter(year):
     return date(year, month, day)
 
 def get_complete_holidays(start_date, end_date, state, city):
-    """Gera lista de feriados classificada."""
     hols_list = []
     years = list(range(start_date.year, end_date.year + 1))
     br_hols = holidays.Brazil(years=years, subdiv=state)
@@ -155,7 +149,6 @@ def get_complete_holidays(start_date, end_date, state, city):
                 hols_list.append({"Data": dt, "Tipo": "Nacional (Móvel)", "Nome": name})
                 history_dates.add(dt)
 
-    # --- Feriados Municipais ---
     city_hols = MUNICIPAL_HOLS.get(state, {}).get(city, {})
 
     for dt_str, name in city_hols.items():
@@ -165,32 +158,19 @@ def get_complete_holidays(start_date, end_date, state, city):
                 day, month = int(parts[0]), int(parts[1])
                 for y in years:
                     dt = date(y, month, day)
-                    if start_date <= dt <= end_date:
-                        if dt not in history_dates:
-                            hols_list.append({"Data": dt, "Tipo": "Municipal", "Nome": name})
-                            history_dates.add(dt)
-                        else:
-                            # Update existing holiday type to clarify it's also Municipal
-                            for h in hols_list:
-                                if h['Data'] == dt:
-                                    h['Tipo'] = "Municipal"
+                    if start_date <= dt <= end_date and dt not in history_dates:
+                        hols_list.append({"Data": dt, "Tipo": "Municipal", "Nome": name})
+                        history_dates.add(dt)
             elif len(parts) == 3:
                 day, month, y_val = int(parts[0]), int(parts[1]), int(parts[2])
                 dt = date(y_val, month, day)
-                if start_date <= dt <= end_date:
-                    if dt not in history_dates:
-                        hols_list.append({"Data": dt, "Tipo": "Municipal", "Nome": name})
-                        history_dates.add(dt)
-                    else:
-                        for h in hols_list:
-                            if h['Data'] == dt:
-                                h['Tipo'] = "Municipal"
-        except Exception as e:
+                if start_date <= dt <= end_date and dt not in history_dates:
+                    hols_list.append({"Data": dt, "Tipo": "Municipal", "Nome": name})
+                    history_dates.add(dt)
+        except Exception:
             pass
 
-    # Sort chronological
     hols_list.sort(key=lambda x: x['Data'])
-    
     return hols_list
 
 def get_rest_days(start_date, end_date):
@@ -205,7 +185,7 @@ def is_valid_start(dt, hols, rests):
     if dt in hols or dt in rests: return False
     if (dt + timedelta(days=1)) in hols or (dt + timedelta(days=1)) in rests: return False
     if (dt + timedelta(days=2)) in hols or (dt + timedelta(days=2)) in rests: return False
-    for r in st.session_state['roteiro']:
+    for r in st.session_state.get('selected_ops', []):
         if r['start'] <= dt <= r['end']: return False
     return True
 
@@ -225,7 +205,7 @@ def calc_gain(start_dt, length, hols, rests, max_date):
     return total_days, actual_start, actual_end
 
 def get_clt_lengths(saldo):
-    roteiro = st.session_state['roteiro']
+    roteiro = st.session_state.get('selected_ops', [])
     has_14 = any(r['length'] >= 14 for r in roteiro)
     count = len(roteiro)
     opt = []
@@ -249,7 +229,6 @@ def get_clt_lengths(saldo):
 if st.session_state['step'] == 1:
     st.subheader("Configurações do Período")
     
-    # Lógica de dependência de datas
     def on_change_ini():
         if not st.session_state.get('manual_end_date', False) and st.session_state.get('d_ini') is not None:
             st.session_state['d_fim'] = st.session_state['d_ini'] + timedelta(days=365)
@@ -281,7 +260,6 @@ elif st.session_state['step'] == 2:
     hols_raw = get_complete_holidays(conf['start'], conf['end'], conf['uf'], conf['city'])
     df_hols = pd.DataFrame(hols_raw)
     if not df_hols.empty:
-        # Feriados sem nome oficial (default "Feriado Municipal") começam desativados
         df_hols['Ativo'] = df_hols['Nome'].apply(lambda x: x != "Feriado Municipal")
         df_hols['Data_Show'] = df_hols['Data'].apply(lambda x: x.strftime('%d/%m/%y'))
         disp_df = df_hols[['Data_Show', 'Tipo', 'Nome', 'Ativo']].copy()
@@ -310,41 +288,29 @@ elif st.session_state['step'] == 2:
         st.rerun()
 
 elif st.session_state['step'] == 3:
-    # Configurações para a etapa 3
     conf = st.session_state['config_base']
     saldo = st.session_state['saldo_ferias']
     total_days = conf.get('total', saldo)
     used_days = total_days - saldo
 
-    # Inicializar container de roteiro se não existir
     if 'selected_ops' not in st.session_state:
         st.session_state['selected_ops'] = []
 
     st.subheader("Seleção de Períodos")
-    # Exibir saldo como usado/total
     st.metric("Saldo Utilizado", f"{used_days}/{total_days} dias")
 
-    # ---- Períodos já selecionados ----
+    # ---- Períodos já selecionados (Cards Clicáveis) ----
     if st.session_state['selected_ops']:
         st.markdown("### Períodos Escolhidos")
         for idx, sel in enumerate(st.session_state['selected_ops']):
-            sel_title = f"**Tirando {sel['length']} dias desde {sel['start'].strftime('%d/%m/%y')} você ganha +{sel['gain']} dias!**"
-            sel_ferias = f"Empresa: {sel['start'].strftime('%d/%m/%y')} - {sel['end'].strftime('%d/%m/%y')}"
-            sel_real = f"Real: {sel['v_start'].strftime('%d/%m/%y')} - {sel['v_end'].strftime('%d/%m/%y')}"
+            # O texto usa \n para quebrar a linha dentro do botão
+            label_btn = f"✅ Tirando {sel['length']} dias em {sel['start'].strftime('%d/%m/%y')} (+{sel['gain']} dias de ganho)\nFolga real: {sel['v_start'].strftime('%d/%m/%y')} a {sel['v_end'].strftime('%d/%m/%y')} (Clique para remover)"
             
-            c_sel, c_del = st.columns([5, 1])
-            with c_sel:
-                st.markdown(f"""
-                <div style="line-height: 1.4; margin-top: -5px;">
-                    <strong>Tirando {sel['length']} dias desde {sel['start'].strftime('%d/%m/%y')} você ganha +{sel['gain']} dias!</strong><br>
-                    <span style="font-size: 0.85rem; opacity: 0.7;">{sel_ferias}<br>{sel_real}</span>
-                </div>
-                """, unsafe_allow_html=True)
-            with c_del:
-                if st.button("-", key=f"remove_op_{idx}", use_container_width=True):
-                    op_to_remove = st.session_state['selected_ops'].pop(idx)
-                    st.session_state['saldo_ferias'] += op_to_remove['length']
-                    st.rerun()
+            # O botão inteiro age como o removedor
+            if st.button(label_btn, key=f"remove_op_{idx}", use_container_width=True):
+                op_to_remove = st.session_state['selected_ops'].pop(idx)
+                st.session_state['saldo_ferias'] += op_to_remove['length']
+                st.rerun()
         st.write("") 
 
     if saldo > 0:
@@ -360,7 +326,6 @@ elif st.session_state['step'] == 3:
                     for l in lens:
                         if curr + timedelta(days=l-1) <= conf['end']:
                             total, v_start, v_end = calc_gain(curr, l, hols, rests, conf['end'])
-                            # Evitar sobreposição
                             overlap = any(not (v_end < r['v_start'] or v_start > r['v_end']) 
                                          for r in st.session_state['selected_ops'])
                             
@@ -380,25 +345,15 @@ elif st.session_state['step'] == 3:
             else:
                 st.markdown("### Sugestões para seu saldo restante")
                 for idx, op in enumerate(res[:12]):
-                    label_title = f"Tirando {op['length']} dias desde {op['start'].strftime('%d/%m/%y')} você ganha +{op['gain']} dias!"
-                    label_ferias = f"Empresa: {op['start'].strftime('%d/%m/%y')} a {op['end'].strftime('%d/%m/%y')}"
-                    label_real = f"Real: {op['v_start'].strftime('%d/%m/%y')} a {op['v_end'].strftime('%d/%m/%y')}"
+                    # Texto limpo com quebra de linha para formar o Card
+                    label_btn = f"🗓️ {op['length']} dias em {op['start'].strftime('%d/%m/%y')} ➔ Folga de {op['total']} dias!\nReal: {op['v_start'].strftime('%d/%m/%y')} a {op['v_end'].strftime('%d/%m/%y')} (Clique para adicionar)"
                     
-                    cols = st.columns([5, 1])
-                    with cols[0]:
-                        st.markdown(f"""
-                        <div style="line-height: 1.4; margin-top: -5px;">
-                            <strong>{label_title}</strong><br>
-                            <span style="font-size: 0.85rem; opacity: 0.7;">{label_ferias}<br>{label_real}</span>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    with cols[1]:
-                        if st.button("+", key=f"sel_btn_{idx}_{op['start']}", use_container_width=True):
-                            st.session_state['selected_ops'].append(op)
-                            st.session_state['saldo_ferias'] -= op['length']
-                            st.rerun()
-                    st.write("") 
-        
+                    # O botão inteiro age como adicionador
+                    if st.button(label_btn, key=f"sel_btn_{idx}_{op['start']}", use_container_width=True):
+                        st.session_state['selected_ops'].append(op)
+                        st.session_state['saldo_ferias'] -= op['length']
+                        st.rerun()
+                    
     # Resumo Final
     if st.session_state['selected_ops']:
         st.write("") 
@@ -419,7 +374,7 @@ elif st.session_state['step'] == 3:
         } for r in sorted(st.session_state['selected_ops'], key=lambda k: k['start'])]
         st.table(itinerario_data)
         
-    if st.button("Reiniciar Planejamento", key="restart_all", use_container_width=True):
+    if st.button("Reiniciar Planejamento", key="restart_all", use_container_width=True, type="primary"):
         st.session_state['step'] = 1
         st.session_state['selected_ops'] = []
         st.session_state['saldo_ferias'] = total_days
