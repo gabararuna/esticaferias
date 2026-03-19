@@ -4,53 +4,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sage | Desenvolvimento Profissional</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Estica Férias | Maximize suas férias!</title>
+    <meta name="description"
+        content="Planeje suas férias de forma inteligente. Cruzamos seu saldo de dias com feriados nacionais, estaduais e municipais para você folgar o máximo possível.">
+
+    <!-- SEO & Social Meta Tags -->
+    <meta property="og:title" content="Estica Férias">
+    <meta property="og:description" content="Maximize seus dias de descanso cruzando feriados com seu saldo de férias.">
+    <meta property="og:type" content="website">
+
+    <!-- Scripts & Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- AdSense Placeholder (Header) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4059018857698196"
+        crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col">
+    <!-- Glass Header -->
     <header class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div class="flex items-center gap-4">
             <a href="https://portfolio.gabrielararuna.com"
                 class="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-sm font-medium text-slate-300 hover:text-white">
                 <i data-lucide="arrow-left" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i>
             </a>
-            <h1 class="logo text-xl font-bold tracking-tight">Sage</h1>
+            <h1 class="text-xl font-bold tracking-tight text-white">Estica Férias</h1>
         </div>
+        <nav class="flex-1 flex justify-end text-sm font-medium">
+            <a href="#" id="open-help" class="text-white hover:opacity-80 transition-opacity">Metodologia</a>
+        </nav>
     </header>
 
-    <main>
-        <section class="hero animate-in">
-            <h1>Sua jornada para o domínio técnico começa aqui.</h1>
-            <p>Acesse conteúdos exclusivos e trilhas de aprendizado desenhadas por especialistas.</p>
+    <main class="flex-1 max-w-4xl mx-auto w-full px-6 py-12 space-y-12">
+        <!-- Hero Section -->
+        <section id="hero-section" class="text-center space-y-6">
+            <h2 class="text-4xl md:text-6xl font-bold leading-tight">
+                Transforme suas férias <br>
+                <span class="text-gradient">em folgas inesquecíveis</span>
+            </h2>
+            <p class="text-slate-400 max-w-xl mx-auto text-lg">
+                Otimizamos o seu calendário para você aproveitar feriados e finais de semana para esticar suas férias
+                sem gastar dias extras.
+            </p>
         </section>
 
-        <div id="catalog-root" class="animate-in" style="animation-delay: 0.2s;">
-            <!-- Dynamic content loaded from data.json will be inserted here -->
-            <div class="loading" style="padding: 10% 4%; text-align: center; color: var(--text-secondary);">
-                <div class="skeleton" style="width: 200px; height: 30px; margin: 0 auto 2rem;"></div>
-                <p>Carregando catálogo de cursos...</p>
+        <!-- Main AdSense Slot -->
+        <div id="top-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
+            <div
+                style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
+            </div>
+        </div>
+
+        <!-- Multi-step Multi-step Container -->
+        <div id="app-container" class="space-y-8">
+            <!-- Step 1: Configuration -->
+            <div id="step-1" class="glass-card rounded-2xl p-8 space-y-6">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">
+                        1</div>
+                    <h3 class="text-xl font-semibold">Configuração do Período</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-400">Início do Período</label>
+                        <input type="date" id="input-start"
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-400">Fim do Período</label>
+                        <input type="date" id="input-end"
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-400">Estado</label>
+                        <select id="select-state"
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors cursor-pointer">
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-400">Cidade</label>
+                        <select id="select-city"
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors cursor-pointer">
+                            <option value="">Selecione o estado primeiro...</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2 md:col-span-2">
+                        <label class="text-sm font-medium text-slate-400">Saldo de Férias</label>
+                        <div class="flex items-center gap-4">
+                            <input id="input-days" type="range" min="5" max="30" value="30"
+                                class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <span id="days-value" class="text-2xl font-bold w-12 text-center text-blue-400">30</span>
+                        </div>
+                        <p id="clt-warning"
+                            class="text-[11px] text-red-100 font-medium hidden mt-4 animate-fade-in text-center bg-red-500/10 py-3 px-4 rounded-2xl border border-red-500/20 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                            Pela CLT você só pode vender no máximo 10 dias!
+                        </p>
+                    </div>
+                </div>
+
+                <button id="btn-next-1" class="w-full btn-primary py-4 text-lg">
+                    Avançar
+                </button>
+            </div>
+
+            <!-- Step 2: Manage Holidays (Hidden initially) -->
+            <div id="step-2" class="hidden glass-card rounded-2xl p-8 space-y-6">
+                <!-- Logic for Step 2 will be injected via JS -->
+            </div>
+
+            <!-- Step 3: Suggestions (Hidden initially) -->
+            <div id="step-3" class="hidden space-y-6">
+                <!-- Results will be injected via JS -->
+            </div>
+        </div>
+
+        <!-- Bottom AdSense Slot -->
+        <div id="bottom-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
+            <div
+                style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
             </div>
         </div>
     </main>
 
-    <script>
-        console.log("SAGE: Script inline carregado");
-        window.onerror = function (msg, url, line) {
-            const root = document.getElementById('catalog-root');
-            if (root) root.innerHTML = `<div style="color: #ef4444; padding: 20px; border: 1px solid #ef4444; border-radius: 8px; background: rgba(239, 68, 68, 0.1);">
-                <strong>Erro de Execução:</strong><br>${msg}<br><small>Arquivo: ${url}:${line}</small>
-            </div>`;
-        };
-    </script>
-    <script src="app.js" onerror="console.error('Falha ao carregar app.js')"></script>
+    <footer class="border-t border-slate-800 py-12 px-6 bg-slate-950/50">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-white">Estica Férias</span>
+            </div>
+            <p class="text-slate-500 text-sm italic">© 2024 Estica Férias. Todos os direitos reservados.</p>
+            <div class="flex gap-4 text-slate-400">
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram"
+                        class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Help Modal -->
+    <div id="help-modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm modal-overlay"></div>
+        <div
+            class="glass-card relative w-full max-w-2xl rounded-3xl p-8 md:p-12 overflow-y-auto max-h-[90vh] shadow-2xl scale-95 transition-transform duration-300 help-content border border-white/10">
+            <button id="close-help"
+                class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/5">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 class="text-3xl font-bold mb-8 text-white tracking-tight">Metodologia</h2>
+            <div class="space-y-8 text-slate-300 leading-relaxed">
+                <section class="group">
+                    <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-3 text-lg">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center"><i
+                                data-lucide="calendar" class="w-5 h-5"></i></div>
+                        1. Saldo de Férias
+                    </h3>
+                    <p class="pl-11">Por lei (CLT), todo trabalhador tem direito a 30 dias de descanso após 12 meses.
+                        Você pode optar por tirar os 30 dias ou "vender" até 10 dias (o famoso abono pecuniário),
+                        ficando com 20 dias de saldo.</p>
+                </section>
+                <section class="group">
+                    <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-3 text-lg">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center"><i
+                                data-lucide="sparkles" class="w-5 h-5 text-emerald-400"></i></div>
+                        2. Otimização Inteligente
+                    </h3>
+                    <p class="pl-11">Nosso algoritmo analisa o calendário nacional, estadual e municipal. Ele busca
+                        períodos que começam logo após folgas ou feriados ("pontes"), esticando seu descanso real sem
+                        consumir seus dias extras.</p>
+                </section>
+                <section class="group">
+                    <h3 class="text-white font-bold mb-3 flex items-center gap-3 text-lg">
+                        <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i
+                                data-lucide="shield-check" class="w-5 h-5 text-white"></i></div>
+                        3. Regras da CLT
+                    </h3>
+                    <ul class="list-disc pl-16 space-y-2">
+                        <li>As férias não podem começar em dia de folga ou 2 dias antes de feriado.</li>
+                        <li>Um dos períodos deve ter no mínimo 14 dias corridos.</li>
+                        <li>Nenhum período pode ser inferior a 5 dias cada.</li>
+                    </ul>
+                </section>
+                <div class="p-6 bg-blue-500/10 rounded-2xl border border-blue-500/20 mt-12">
+                    <p class="text-sm font-bold text-blue-400 mb-2 uppercase tracking-widest">Dica de Especialista:</p>
+                    <p class="text-sm opacity-80">Ao selecionar várias sugestões, o app garante que os períodos não se
+                        sobreponham, permitindo que você planeje seu ano inteiro em segundos e aproveite o máximo
+                        possível.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script type="module" src="app.js"></script>
     <script>
         // Init Lucide Icons
         lucide.createIcons();
