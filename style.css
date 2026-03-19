@@ -1,0 +1,184 @@
+/* 
+ * Custom Styles for Estica Férias 
+ * Inspired by portfolio.gabrielararuna.com and sage.gabrielararuna.com
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap');
+
+:root {
+  --bg-main: #0a0a0c;
+  --bg-card: #141417;
+  --bg-secondary: #1c1c21;
+  --text-main: #f0f0f2;
+  --text-muted: #94a3b8;
+  --accent-lavender: #c4b5fd;
+  --accent-blue: #3b82f6;
+  --accent-teal: #2dd4bf;
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--accent-lavender), var(--accent-blue), var(--accent-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(20, 20, 23, 0.7);
+  backdrop-filter: blur(20px) saturate(1.8);
+  border: 0.8px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  border: 0.8px solid var(--glass-border);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 24px -8px rgba(59, 130, 246, 0.1);
+}
+
+.btn-primary {
+  background-color: var(--text-main);
+  color: var(--bg-main);
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 0.8px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-secondary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* AdSense Resilience */
+.ads-container:not(:has(ins iframe)):not(:has(ins.adsbygoogle[data-ad-status="filled"])) {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: none !important;
+}
+
+/* Transitions */
+#hero-section {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#hero-section.hidden {
+    display: none;
+}
+
+#hero-section.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+/* CLT Validation */
+.slider-danger {
+    accent-color: #f87171 !important;
+}
+.slider-danger::-webkit-slider-runnable-track {
+    background: #450a0a !important;
+    border-radius: 8px !important;
+}
+.slider-danger::-moz-range-track {
+    background: #450a0a !important;
+    border-radius: 8px !important;
+}
+
+/* Modal System */
+#help-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+#help-modal.open .help-content {
+    transform: scale(1);
+}
+
+.modal-overlay {
+    transition: opacity 0.3s ease;
+}
+
+/* Step 3 Standardization */
+.op-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.op-card-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+
+.op-card-subtext {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2d2d35;
+}
+
+/* Hide Streamlit-like elements if any */
+iframe { border: none; }
