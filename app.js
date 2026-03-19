@@ -50,14 +50,28 @@ async function init() {
 
         const startInput = document.getElementById('input-start');
         const endInput = document.getElementById('input-end');
-        startInput.valueAsDate = now;
-        endInput.valueAsDate = nextYear;
+        setYmd(startInput, now);
+        setYmd(endInput, nextYear);
 
         setTimeout(tryGeolocation, 1000);
 
     } catch (err) {
         console.error("Initialization failed:", err);
     }
+}
+
+function parseYmd(str) {
+    if (!str) return null;
+    const [y, m, d] = str.split('-').map(Number);
+    return new Date(y, m - 1, d);
+}
+
+function setYmd(input, date) {
+    if (!date) {
+        input.value = '';
+        return;
+    }
+    input.value = logic.toYmd(date);
 }
 
 function toggleHero(visible) {
@@ -162,10 +176,11 @@ function setupEventListeners() {
     }
 
     startInput.onchange = () => {
-        if (startInput.valueAsDate) {
-            const newEnd = new Date(startInput.valueAsDate);
+        const date = parseYmd(startInput.value);
+        if (date) {
+            const newEnd = new Date(date);
             newEnd.setFullYear(newEnd.getFullYear() + 1);
-            endInput.valueAsDate = newEnd;
+            setYmd(endInput, newEnd);
         }
     };
 
@@ -202,8 +217,8 @@ function setupEventListeners() {
 // --- Step Transitions ---
 
 async function goToStep2() {
-    const startInput = document.getElementById('input-start').valueAsDate;
-    const endInput = document.getElementById('input-end').valueAsDate;
+    const startInput = parseYmd(document.getElementById('input-start').value);
+    const endInput = parseYmd(document.getElementById('input-end').value);
     const uf = document.getElementById('select-state').value;
     const city = document.getElementById('select-city').value;
     const total = parseInt(document.getElementById('input-days').value);

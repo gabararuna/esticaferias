@@ -3,6 +3,13 @@
  * Ported from Python/Streamlit implementation
  */
 
+export const toYmd = (date) => {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+};
+
 export const getEaster = (year) => {
   const a = year % 19;
   const b = Math.floor(year / 100);
@@ -65,7 +72,7 @@ export const getCompleteHolidays = async (startDate, endDate, state, city, munic
 
   const seen = new Set();
   const addHol = (date, name, type) => {
-    const key = date.toISOString().split('T')[0];
+    const key = toYmd(date);
     if (date >= startDate && date <= endDate && !seen.has(key)) {
       hols.push({ date: new Date(date), name, type });
       seen.add(key);
@@ -101,7 +108,7 @@ export const getRestDays = (start, end) => {
   let curr = new Date(start);
   while (curr <= end) {
     if (curr.getDay() === 0 || curr.getDay() === 6) { // 0=Sun, 6=Sat
-      rests.add(curr.toISOString().split('T')[0]);
+      rests.add(toYmd(curr));
     }
     const next = new Date(curr);
     next.setDate(next.getDate() + 1);
@@ -114,7 +121,7 @@ export const isValidStart = (date, hols, rests, selectedOps = []) => {
   const dStr = (d, offset = 0) => {
     const date = new Date(d);
     date.setDate(date.getDate() + offset);
-    return date.toISOString().split('T')[0];
+    return toYmd(date);
   };
 
   const isHolidayOrRest = (d) => hols[d] || rests.has(d);
@@ -136,7 +143,7 @@ export const calcGain = (start, length, hols, rests, maxDate) => {
   const officialEnd = new Date(start);
   officialEnd.setDate(officialEnd.getDate() + length - 1);
 
-  const isNonWork = (d) => hols[d.toISOString().split('T')[0]] || rests.has(d.toISOString().split('T')[0]);
+  const isNonWork = (d) => hols[toYmd(d)] || rests.has(toYmd(d));
 
   let actualStart = new Date(start);
   while (true) {
