@@ -1,6 +1,7 @@
-# Estica Férias Web (Native)
+# Estica Féria
 
-Versão nativa e modernizada do aplicativo "Estica Férias", otimizada para performance, SEO e AdSense.
+Tem como objetivo otimizar o seu pedido de férias para que você possa usar os fins de semana e feriados para prolongar o seu descanso.
+Versão nativa e modernizada do aplicativo "Estica Férias", otimizada para performance, SEO e AdSense. 
 
 ## ✨ Destaques
 - **Design Premium**: Interface baseada em glassmorphism, tipografia moderna (Outfit/Inter) e gradientes fluidos.
