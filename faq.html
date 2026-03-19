@@ -55,6 +55,10 @@
         </div>
     </header>
 
+    <div id="top-ads" class="ads-container">
+        <div class="ad-placeholder">Anúncio Superior</div>
+    </div>
+
     <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-12 space-y-12">
         <section class="text-center space-y-4">
             <h1 class="text-4xl md:text-5xl font-bold leading-tight">
@@ -120,10 +124,8 @@
         </div>
 
         <!-- AdSense Slot -->
-        <div id="bottom-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
-            <div style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
-                <!-- Placeholder para AdSense -->
-            </div>
+        <div id="bottom-ads" class="ads-container">
+            <div class="ad-placeholder">Anúncio Inferior</div>
         </div>
     </main>
 
@@ -147,8 +149,36 @@
         </div>
     </footer>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <nav class="flex flex-col items-center gap-8">
+            <a href="index.html" class="mobile-nav-link">Início</a>
+            <a href="metodologia.html" class="mobile-nav-link">Metodologia</a>
+            <a href="faq.html" class="mobile-nav-link active">FAQ</a>
+            <div class="flex gap-6 mt-8">
+                <a href="privacidade.html" class="text-slate-500 hover:text-white text-sm">Privacidade</a>
+                <a href="termos.html" class="text-slate-500 hover:text-white text-sm">Termos</a>
+            </div>
+        </nav>
+    </div>
+
     <script>
         lucide.createIcons();
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-mobile-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.onclick = () => mobileMenu.classList.add('open');
+        }
+        if (closeBtn && mobileMenu) {
+            closeBtn.onclick = () => mobileMenu.classList.remove('open');
+        }
 
         // Accordion Logic
         document.querySelectorAll('.accordion-item button').forEach(button => {

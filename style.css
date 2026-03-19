@@ -79,14 +79,73 @@ h1, h2, h3 {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* AdSense Resilience */
+/* AdSense Resilience & Refinement */
+.ads-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+    min-height: 50px; /* Thinner bar */
+    max-height: 100px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
 .ads-container:not(:has(ins iframe)):not(:has(ins.adsbygoogle[data-ad-status="filled"])) {
   display: none !important;
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-  overflow: hidden !important;
   border: none !important;
+}
+
+.ad-placeholder {
+    width: 100%;
+    max-width: 728px;
+    height: 60px; /* Thin bar height */
+    background-color: #1a1a1c;
+    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255,255,255,0.05);
+    border-radius: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile Menu Overlay */
+#mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+#mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobile-nav-link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+    color: white;
 }
 
 /* Transitions */

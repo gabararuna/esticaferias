@@ -184,6 +184,18 @@ function setupEventListeners() {
         }
     };
 
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn && mobileMenu) {
+        menuBtn.onclick = () => mobileMenu.classList.add('open');
+    }
+    if (closeBtn && mobileMenu) {
+        closeBtn.onclick = () => mobileMenu.classList.remove('open');
+    }
+
     document.getElementById('btn-next-1').onclick = () => goToStep2();
 }
 

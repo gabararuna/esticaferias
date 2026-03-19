@@ -60,10 +60,8 @@
         </section>
 
         <!-- Main AdSense Slot -->
-        <div id="top-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
-            <div
-                style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
-            </div>
+        <div id="top-ads" class="ads-container">
+            <div class="ad-placeholder">Anúncio Superior</div>
         </div>
 
         <!-- Multi-step Multi-step Container -->
@@ -133,10 +131,8 @@
         </div>
 
         <!-- Bottom AdSense Slot -->
-        <div id="bottom-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
-            <div
-                style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
-            </div>
+        <div id="bottom-ads" class="ads-container">
+            <div class="ad-placeholder">Anúncio Inferior</div>
         </div>
     </main>
 
@@ -159,6 +155,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu">
+        <button id="close-mobile-menu" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <nav class="flex flex-col items-center gap-8">
+            <a href="index.html" class="mobile-nav-link active">Início</a>
+            <a href="metodologia.html" class="mobile-nav-link">Metodologia</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
+            <div class="flex gap-6 mt-8">
+                <a href="privacidade.html" class="text-slate-500 hover:text-white text-sm">Privacidade</a>
+                <a href="termos.html" class="text-slate-500 hover:text-white text-sm">Termos</a>
+            </div>
+        </nav>
+    </div>
 
     <!-- App Logic -->
     <script type="module" src="app.js"></script>
