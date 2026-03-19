@@ -160,60 +160,6 @@
         </div>
     </footer>
 
-    <!-- Help Modal -->
-    <div id="help-modal"
-        class="fixed inset-0 z-[100] flex items-center justify-center p-6 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm modal-overlay"></div>
-        <div
-            class="glass-card relative w-full max-w-2xl rounded-3xl p-8 md:p-12 overflow-y-auto max-h-[90vh] shadow-2xl scale-95 transition-transform duration-300 help-content border border-white/10">
-            <button id="close-help"
-                class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/5">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            <h2 class="text-3xl font-bold mb-8 text-white tracking-tight">Metodologia</h2>
-            <div class="space-y-8 text-slate-300 leading-relaxed">
-                <section class="group">
-                    <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-3 text-lg">
-                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center"><i
-                                data-lucide="calendar" class="w-5 h-5"></i></div>
-                        1. Saldo de Férias
-                    </h3>
-                    <p class="pl-11">Por lei (CLT), todo trabalhador tem direito a 30 dias de descanso após 12 meses.
-                        Você pode optar por tirar os 30 dias ou "vender" até 10 dias (o famoso abono pecuniário),
-                        ficando com 20 dias de saldo.</p>
-                </section>
-                <section class="group">
-                    <h3 class="text-blue-400 font-bold mb-3 flex items-center gap-3 text-lg">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center"><i
-                                data-lucide="sparkles" class="w-5 h-5 text-emerald-400"></i></div>
-                        2. Otimização Inteligente
-                    </h3>
-                    <p class="pl-11">Nosso algoritmo analisa o calendário nacional, estadual e municipal. Ele busca
-                        períodos que começam logo após folgas ou feriados ("pontes"), esticando seu descanso real sem
-                        consumir seus dias extras.</p>
-                </section>
-                <section class="group">
-                    <h3 class="text-white font-bold mb-3 flex items-center gap-3 text-lg">
-                        <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i
-                                data-lucide="shield-check" class="w-5 h-5 text-white"></i></div>
-                        3. Regras da CLT
-                    </h3>
-                    <ul class="list-disc pl-16 space-y-2">
-                        <li>As férias não podem começar em dia de folga ou 2 dias antes de feriado.</li>
-                        <li>Um dos períodos deve ter no mínimo 14 dias corridos.</li>
-                        <li>Nenhum período pode ser inferior a 5 dias cada.</li>
-                    </ul>
-                </section>
-                <div class="p-6 bg-blue-500/10 rounded-2xl border border-blue-500/20 mt-12">
-                    <p class="text-sm font-bold text-blue-400 mb-2 uppercase tracking-widest">Dica de Especialista:</p>
-                    <p class="text-sm opacity-80">Ao selecionar várias sugestões, o app garante que os períodos não se
-                        sobreponham, permitindo que você planeje seu ano inteiro em segundos e aproveite o máximo
-                        possível.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- App Logic -->
     <script type="module" src="app.js"></script>
     <script>

@@ -139,16 +139,27 @@ function setupEventListeners() {
     const daysLabel = document.getElementById('days-value');
     const cltWarning = document.getElementById('clt-warning');
 
-    // Modal Events
+    // Modal Events (Optional - only if elements exist)
     const helpModal = document.getElementById('help-modal');
-    document.getElementById('open-help').onclick = (e) => {
-        e.preventDefault();
-        helpModal.classList.add('open');
-    };
-    document.getElementById('close-help').onclick = () => helpModal.classList.remove('open');
-    helpModal.onclick = (e) => {
-        if (e.target.classList.contains('modal-overlay')) helpModal.classList.remove('open');
-    };
+    const openHelp = document.getElementById('open-help');
+    const closeHelp = document.getElementById('close-help');
+
+    if (openHelp && helpModal) {
+        openHelp.onclick = (e) => {
+            e.preventDefault();
+            helpModal.classList.add('open');
+        };
+    }
+
+    if (closeHelp && helpModal) {
+        closeHelp.onclick = () => helpModal.classList.remove('open');
+    }
+
+    if (helpModal) {
+        helpModal.onclick = (e) => {
+            if (e.target.classList.contains('modal-overlay')) helpModal.classList.remove('open');
+        };
+    }
 
     startInput.onchange = () => {
         if (startInput.valueAsDate) {
