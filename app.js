@@ -325,12 +325,12 @@ function renderStep3() {
                     <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">3</div>
                     <h3 class="text-xl font-semibold">Definir Períodos</h3>
                 </div>
-                <div class="flex flex-col items-end">
-                    <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-0.5">Saldo</span>
-                    <div class="flex items-center gap-2">
+                <div class="text-right flex items-center gap-2">
+                    <div>
+                        <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Saldo</span>
                         <span class="text-xl font-bold text-white">${usedDays}/${state.config.total} dias</span>
-                        ${state.saldo === 0 ? '<div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center"><i data-lucide="check" class="w-5 h-5"></i></div>' : ''}
                     </div>
+                    ${state.saldo === 0 ? '<div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center"><i data-lucide="check" class="w-5 h-5"></i></div>' : ''}
                 </div>
             </div>
 
@@ -392,6 +392,9 @@ function renderStep3() {
             <div class="pt-6 border-t border-slate-700/50 flex gap-4">
                 <button id="btn-restart" class="flex-1 btn-secondary py-3 flex items-center justify-center gap-2">
                     Recomeçar
+                </button>
+                <button id="btn-share" class="p-3 btn-secondary">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
                 </button>
             </div>
         </div>
