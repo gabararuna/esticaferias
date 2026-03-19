@@ -393,9 +393,6 @@ function renderStep3() {
                 <button id="btn-restart" class="flex-1 btn-secondary py-3 flex items-center justify-center gap-2">
                     Recomeçar
                 </button>
-                <button id="btn-share" class="p-3 btn-secondary">
-                    <i data-lucide="share-2" class="w-5 h-5"></i>
-                </button>
             </div>
         </div>
     `;
