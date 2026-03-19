@@ -26,7 +26,11 @@
 <body class="min-h-screen flex flex-col">
     <!-- Glass Header -->
     <header class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-4">
+            <a href="https://portfolio.gabrielararuna.com"
+                class="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-sm font-medium text-slate-300 hover:text-white">
+                <i data-lucide="arrow-left" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i>
+            </a>
             <h1 class="text-xl font-bold tracking-tight text-white">Estica Férias</h1>
         </div>
         <nav class="flex-1 flex justify-end text-sm font-medium">
@@ -36,7 +40,7 @@
 
     <main class="flex-1 max-w-4xl mx-auto w-full px-6 py-12 space-y-12">
         <!-- Hero Section -->
-        <section id="hero-section" class="text-center space-y-6 mb-12">
+        <section id="hero-section" class="text-center space-y-6">
             <h2 class="text-4xl md:text-6xl font-bold leading-tight">
                 Transforme suas férias <br>
                 <span class="text-gradient">em folgas inesquecíveis</span>
@@ -48,7 +52,7 @@
         </section>
 
         <!-- Main AdSense Slot -->
-        <div id="top-ads" class="ads-container max-w-full flex justify-center py-4 min-h-0 overflow-hidden">
+        <div id="top-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
             <div
                 style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
             </div>
@@ -121,7 +125,7 @@
         </div>
 
         <!-- Bottom AdSense Slot -->
-        <div id="bottom-ads" class="ads-container max-w-full flex justify-center py-4 min-h-0 overflow-hidden">
+        <div id="bottom-ads" class="ads-container max-w-full flex justify-center min-h-0 overflow-hidden">
             <div
                 style="width: 100%; max-width: 728px; height: 90px; background-color: #2a2a2a; color: #888; display: flex; align-items: center; justify-content: center; border: 1px dashed #555;">
             </div>
@@ -133,7 +137,7 @@
             <div class="flex items-center gap-2">
                 <span class="font-bold text-white">Estica Férias</span>
             </div>
-            <p class="text-slate-500 text-sm">© 2025 Estica Férias. Todos os direitos reservados.</p>
+            <p class="text-slate-500 text-sm italic">© 2024 Estica Férias. Todos os direitos reservados.</p>
             <div class="flex gap-4 text-slate-400">
                 <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram"
                         class="w-5 h-5"></i></a>
@@ -197,7 +201,7 @@
     </div>
 
     <!-- App Logic -->
-    <script type="module" src="app.js?v=2"></script>
+    <script type="module" src="app.js"></script>
     <script>
         // Init Lucide Icons
         lucide.createIcons();
