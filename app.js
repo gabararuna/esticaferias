@@ -364,20 +364,20 @@ function renderStep3() {
             <div class="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-4 shadow-lg shadow-emerald-500/5">
                 <div class="flex items-center gap-3 text-emerald-400">
                     <i data-lucide="party-popper" class="w-6 h-6"></i>
-                    <h4 class="font-bold text-lg">Seu Planejamento está Completo!</h4>
+                    <h4 class="font-bold text-lg">Planejamento Completo!</h4>
                 </div>
                 
                 <div class="space-y-4 pt-2">
                     <div class="flex justify-between items-center text-sm">
-                        <span class="text-slate-400">Total de dias vendidos (Abono):</span>
+                        <span class="text-slate-400">Dias Vendidos (Abono Pecuniário):</span>
                         <span class="font-bold text-white">${abonoDays} dias</span>
                     </div>
                     <div class="flex justify-between items-center text-sm">
-                        <span class="text-slate-400">Dias que pedirá para a empresa:</span>
+                        <span class="text-slate-400">Dias de Férias para Empresa:</span>
                         <span class="font-bold text-white">${requestedDays} dias</span>
                     </div>
                     <div class="flex justify-between items-center border-t border-slate-700/50 pt-2">
-                        <span class="text-slate-100 font-semibold">Total de Folga Real:</span>
+                        <span class="text-slate-100 font-semibold">Dias de Folga Efetivos:</span>
                         <span class="text-xl font-bold text-emerald-400">${totalFolga} dias</span>
                     </div>
                 </div>
@@ -406,7 +406,7 @@ function renderStep3() {
                                 <div class="flex flex-col gap-0.5">
                                     <p class="op-card-subtext flex items-center gap-1">
                                         <i data-lucide="building-2" class="w-3 h-3"></i>
-                                        <strong>Pedindo:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
+                                        <strong>Empresa:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
                                     </p>
                                     <p class="op-card-subtext flex items-center gap-1">
                                         <i data-lucide="calendar-heart" class="w-3 h-3"></i>
@@ -434,7 +434,7 @@ function renderStep3() {
                         <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Saldo</span>
                         <span class="text-xl font-bold text-white">${usedDays}/${state.config.total} dias</span>
                     </div>
-                    ${state.saldo === 0 ? '<div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center"><i data-lucide="check" class="w-5 h-5"></i></div>' : ''}
+                    ${state.saldo === 0 ? '' : ''}
                 </div>
             </div>
 
@@ -485,9 +485,6 @@ function renderStep3() {
             <div class="pt-6 border-t border-slate-700/50 flex gap-4">
                 <button id="btn-restart" class="flex-1 btn-secondary py-3 flex items-center justify-center gap-2">
                     Recomeçar
-                </button>
-                <button id="btn-share" class="p-3 btn-secondary">
-                    <i data-lucide="share-2" class="w-5 h-5"></i>
                 </button>
             </div>
         </div>
