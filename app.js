@@ -464,7 +464,7 @@ function renderStep3() {
                                 <div class="flex flex-col gap-0.5 mt-1">
                                     <p class="op-card-subtext flex items-center gap-1">
                                         <i data-lucide="building-2" class="w-3 h-3"></i> 
-                                        <strong>Pedindo:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
+                                        <strong>Empresa:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
                                     </p>
                                     <p class="op-card-subtext flex items-center gap-1">
                                         <i data-lucide="calendar-heart" class="w-3 h-3"></i> 
