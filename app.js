@@ -355,6 +355,72 @@ function renderStep3() {
 
     const usedDays = state.config.total - state.saldo;
     const totalFolga = state.selectedOps.reduce((acc, op) => acc + op.total, 0);
+    const abonoDays = 30 - state.config.total;
+    const requestedDays = state.selectedOps.reduce((acc, op) => acc + op.length, 0);
+
+    let summaryHtml = '';
+    if (state.saldo < 0.1) {
+        summaryHtml = `
+            <div class="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-4 shadow-lg shadow-emerald-500/5">
+                <div class="flex items-center gap-3 text-emerald-400">
+                    <i data-lucide="party-popper" class="w-6 h-6"></i>
+                    <h4 class="font-bold text-lg">Seu Planejamento está Completo!</h4>
+                </div>
+                
+                <div class="space-y-4 pt-2">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-slate-400">Total de dias vendidos (Abono):</span>
+                        <span class="font-bold text-white">${abonoDays} dias</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-slate-400">Dias que pedirá para a empresa:</span>
+                        <span class="font-bold text-white">${requestedDays} dias</span>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-slate-700/50 pt-2">
+                        <span class="text-slate-100 font-semibold">Total de Folga Real:</span>
+                        <span class="text-xl font-bold text-emerald-400">${totalFolga} dias</span>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-900/50 rounded-xl border border-slate-700">
+                     <p class="text-xs text-slate-400 leading-relaxed">
+                         <i data-lucide="info" class="w-3 h-3 inline-block mr-1"></i>
+                         Além da folga, você receberá o <strong>Terço Constitucional</strong> sobre os 30 dias e o pagamento dos <strong>${abonoDays} dias</strong> de abono pecuniário.
+                     </p>
+                </div>
+            </div>
+        `;
+    } else {
+        const availableOptions = options.slice(0, 10);
+        summaryHtml = `
+            <div class="space-y-4">
+                <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Melhores Opções</h4>
+                <div class="grid grid-cols-1 gap-4">
+                    ${availableOptions.map((op, i) => `
+                        <button class="select-op text-left op-card hover:border-blue-500/50 transition-all group relative overflow-hidden" data-idx="${i}">
+                            <div class="z-10">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="op-card-text">Tire ${op.length} dias e folgue ${op.total} dias!</span>
+                                    <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded-full transition-transform group-hover:scale-110">+${op.gain}</span>
+                                </div>
+                                <div class="flex flex-col gap-0.5">
+                                    <p class="op-card-subtext flex items-center gap-1">
+                                        <i data-lucide="building-2" class="w-3 h-3"></i>
+                                        <strong>Pedindo:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
+                                    </p>
+                                    <p class="op-card-subtext flex items-center gap-1">
+                                        <i data-lucide="calendar-heart" class="w-3 h-3"></i>
+                                        <strong>Folga:</strong> ${op.actualStart.toLocaleDateString('pt-BR')} até ${op.actualEnd.toLocaleDateString('pt-BR')}
+                                    </p>
+                                </div>
+                            </div>
+                            <i data-lucide="plus-circle" class="w-6 h-6 text-slate-600 group-hover:text-blue-500 transition-all group-hover:rotate-90"></i>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
 
     container.innerHTML = `
         <div class="glass-card rounded-2xl p-8 space-y-6">
@@ -395,7 +461,16 @@ function renderStep3() {
                         <div class="op-card animate-fade-in group border-l-4 border-l-blue-500">
                             <div>
                                 <p class="op-card-text">Você tirou ${op.length} dias e folgou ${op.total} dias!</p>
-                                <p class="op-card-subtext">Iniciando em ${op.actualStart.toLocaleDateString('pt-BR')} até ${op.actualEnd.toLocaleDateString('pt-BR')}</p>
+                                <div class="flex flex-col gap-0.5 mt-1">
+                                    <p class="op-card-subtext flex items-center gap-1">
+                                        <i data-lucide="building-2" class="w-3 h-3"></i> 
+                                        <strong>Pedindo:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
+                                    </p>
+                                    <p class="op-card-subtext flex items-center gap-1">
+                                        <i data-lucide="calendar-heart" class="w-3 h-3"></i> 
+                                        <strong>Folga:</strong> ${op.actualStart.toLocaleDateString('pt-BR')} até ${op.actualEnd.toLocaleDateString('pt-BR')}
+                                    </p>
+                                </div>
                             </div>
                             <button class="remove-op text-slate-600 hover:text-red-400 transition-colors" data-idx="${i}">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
@@ -405,27 +480,7 @@ function renderStep3() {
                 </div>
             ` : ''}
 
-            ${state.saldo > 0 ? `
-                <div class="space-y-4">
-                    <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Melhores Opções</h4>
-                    <div class="grid grid-cols-1 gap-4">
-                        ${options.slice(0, 10).map((op, i) => `
-                            <button class="select-op text-left op-card hover:border-blue-500/50 transition-all group relative overflow-hidden" data-idx="${i}">
-                                <div class="z-10">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="op-card-text">Tire ${op.length} dias e folgue ${op.total} dias!</span>
-                                        <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded-full transition-transform group-hover:scale-110">+${op.gain}</span>
-                                    </div>
-                                    <p class="op-card-subtext">
-                                        Iniciando em ${op.actualStart.toLocaleDateString('pt-BR')} até ${op.actualEnd.toLocaleDateString('pt-BR')}
-                                    </p>
-                                </div>
-                                <i data-lucide="plus-circle" class="w-6 h-6 text-slate-600 group-hover:text-blue-500 transition-all group-hover:rotate-90"></i>
-                            </button>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
+            ${summaryHtml}
 
             <div class="pt-6 border-t border-slate-700/50 flex gap-4">
                 <button id="btn-restart" class="flex-1 btn-secondary py-3 flex items-center justify-center gap-2">
