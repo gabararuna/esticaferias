@@ -15,7 +15,7 @@
         },
         "Cerejeiras": {
             "05/08": "Feriado Municipal"
-        },
+        },"
         "Colorado do Oeste": {
             "16/06": "Feriado Municipal"
         },
@@ -877,7 +877,6 @@
             "30/11": "Feriado Municipal"
         }
     },
-    {
     "MA": {
         "Açailândia": {
             "06/06": "Feriado Municipal",
