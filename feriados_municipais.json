@@ -9,13 +9,13 @@
             "06/07": "Feriado Municipal",
             "06/09": "Feriado Municipal"
         },
-        "Cacoal": {"
+        "Cacoal": {
             "18/06": "Feriado Municipal",
             "26/11": "Feriado Municipal"
         },
         "Cerejeiras": {
-            "05/08": "Feriado Municipal""
-        },"
+            "05/08": "Feriado Municipal"
+        },
         "Colorado do Oeste": {
             "16/06": "Feriado Municipal"
         },
@@ -879,640 +879,521 @@
     },
     "MA": {
         "Açailândia": {
-            "06/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "06/06": "Feriado Municipal"
         },
         "Alcântara": {
             "05/07": "Feriado Municipal",
-            "22/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "22/12": "Feriado Municipal"
         },
         "Aldeias Altas": {
             "11/02": "Feriado Municipal",
             "24/06": "Feriado Municipal",
             "10/08": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Alto Alegre do Pindaré": {
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Alto Parnaíba": {
             "19/05": "Feriado Municipal",
-            "08/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/09": "Feriado Municipal"
         },
         "Amarante do Maranhão": {
             "20/01": "Feriado Municipal",
-            "19/04": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "19/04": "Feriado Municipal"
         },
         "Araioses": {
             "20/01": "Feriado Municipal",
             "29/03": "Feriado Municipal",
             "31/08": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Arame": {
             "17/01": "Feriado Municipal",
-            "05/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "05/11": "Feriado Municipal"
         },
         "Arari": {
             "27/06": "Feriado Municipal",
             "15/08": "Feriado Municipal",
-            "14/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "14/09": "Feriado Municipal"
         },
         "Bacabal": {
             "17/04": "Feriado Municipal",
-            "01/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "01/11": "Feriado Municipal"
         },
         "Bacabeira": {
             "29/06": "Dia de São Pedro",
             "10/11": "Aniversário do Município, segundo a Lei Municipal 168/2003",
-            "08/12": "Dia da Padroeira da cidade, Nossa Senhora da Conceição, segundo a Lei Municipal 168/2003",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Dia da Padroeira da cidade, Nossa Senhora da Conceição, segundo a Lei Municipal 168/2003"
         },
         "Bacuri": {
-            "02/01": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "02/01": "Feriado Municipal"
         },
         "Balsas": {
             "22/03": "Feriado Municipal",
             "12/06": "Feriado Municipal",
-            "13/06": "Dia de Santo Antônio",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "13/06": "Dia de Santo Antônio"
         },
         "Barão de Grajaú": {
             "29/03": "Feriado Municipal",
             "13/06": "Dia de Santo Antônio",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Barra do Corda": {
             "03/05": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Barreirinhas": {
             "30/03": "Feriado Municipal",
             "22/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Bequimão": {
             "13/06": "Dia de Santo Antônio",
-            "19/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "19/06": "Feriado Municipal"
         },
         "Bom Jardim": {
             "14/03": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Brejo": {
             "13/06": "Dia de Santo Antônio",
             "11/07": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Buriti": {
             "26/07": "Feriado Municipal",
             "06/12": "Feriado Municipal",
-            "12/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "12/12": "Feriado Municipal"
         },
         "Buriti Bravo": {
             "13/06": "Dia de Santo Antônio",
-            "05/07": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "05/07": "Feriado Municipal"
         },
         "Buriticupu": {
             "28/08": "Feriado Municipal",
             "04/10": "Feriado Municipal",
-            "10/11": "Aniversário da Cidade",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Aniversário da Cidade"
         },
         "Campestre do Maranhão": {
             "31/08": "Feriado Municipal",
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Cândido Mendes": {
             "02/05": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Cantanhede": {
             "22/04": "Feriado Municipal",
             "24/09": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Carolina": {
-            "08/07": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/07": "Feriado Municipal"
         },
         "Carutapera": {
             "20/01": "Feriado Municipal",
-            "03/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "03/06": "Feriado Municipal"
         },
         "Caxias": {
             "19/03": "São José",
             "29/06": "Feriado Municipal",
             "01/08": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Chapadinha": {
             "29/03": "Aniversário da Cidade",
-            "15/09": "Nossa Senhora das Dores",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "15/09": "Nossa Senhora das Dores"
         },
         "Codó": {
             "20/01": "Feriado Municipal",
             "16/04": "Feriado Municipal",
-            "10/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/08": "Feriado Municipal"
         },
         "Coelho Neto": {
             "29/06": "Feriado Municipal",
             "26/07": "Feriado Municipal",
             "31/10": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Colinas": {
             "10/04": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Coroatá": {
-            "08/04": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/04": "Feriado Municipal"
         },
         "Cururupu": {
             "24/06": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Davinópolis": {
             "13/06": "Dia de Santo Antônio",
             "25/07": "Feriado Municipal",
-            "23/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "23/09": "Feriado Municipal"
         },
         "Dom Pedro": {
             "29/06": "Feriado Municipal",
             "08/09": "Feriado Municipal",
-            "09/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "09/12": "Feriado Municipal"
         },
         "Duque Bacelar": {
             "19/03": "São José",
             "29/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Esperantinópolis": {
             "27/06": "Feriado Municipal",
             "15/08": "Feriado Municipal",
-            "31/10": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "31/10": "Feriado Municipal"
         },
         "Estreito": {
             "20/01": "Feriado Municipal",
             "12/05": "Feriado Municipal",
-            "16/07": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "16/07": "Feriado Municipal"
         },
         "Formosa da Serra Negra": {
             "24/06": "Feriado Municipal",
             "10/11": "Feriado Municipal",
-            "24/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "24/12": "Feriado Municipal"
         },
         "Fortaleza dos Nogueiras": {
             "05/08": "Feriado Municipal",
             "06/08": "Feriado Municipal",
-            "31/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "31/12": "Feriado Municipal"
         },
         "Gonçalves Dias": {
             "31/05": "Feriado Municipal",
-            "31/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "31/12": "Feriado Municipal"
         },
         "Governador Archer": {
             "20/01": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Governador Eugênio Barros": {
             "11/03": "Feriado Municipal",
-            "31/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "31/08": "Feriado Municipal"
         },
         "Governador Newton Bello": {
-            "10/11": "Aniversário da Cidade",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Aniversário da Cidade"
         },
         "Governador Nunes Freire": {
             "27/06": "Feriado Municipal",
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Grajaú": {
             "29/04": "Feriado Municipal",
-            "14/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "14/09": "Feriado Municipal"
         },
         "Humberto de Campos": {
             "19/03": "São José",
             "29/06": "Feriado Municipal",
             "26/07": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Icatu": {
             "29/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Igarapé Grande": {
             "20/01": "Feriado Municipal",
             "02/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Imperatriz": {
             "16/07": "Feriado Municipal",
-            "15/10": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "15/10": "Feriado Municipal"
         },
         "Itapecuru Mirim": {
             "21/07": "Feriado Municipal",
             "15/09": "Feriado Municipal",
-            "30/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "30/11": "Feriado Municipal"
         },
         "Itinga do Maranhão": {
             "06/08": "Feriado Municipal",
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "João Lisboa": {
             "30/07": "Feriado Municipal",
-            "22/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "22/12": "Feriado Municipal"
         },
         "Lago da Pedra": {
-            "19/03": "São José",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "19/03": "São José"
         },
         "Lima Campos": {
             "15/01": "Feriado Municipal",
             "29/06": "Feriado Municipal",
-            "30/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "30/09": "Feriado Municipal"
         },
         "Loreto": {
-            "29/03": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/03": "Feriado Municipal"
         },
         "Maracaçumé": {
             "10/11": "Feriado Municipal",
             "28/11": "Memória de Paulo G. Souza",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Matinha": {
-            "20/01": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "20/01": "Feriado Municipal"
         },
         "Matões": {
             "20/01": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Mirador": {
             "29/03": "Feriado Municipal",
-            "15/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "15/08": "Feriado Municipal"
         },
         "Miranda do Norte": {
             "15/03": "Feriado Municipal",
             "29/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Monção": {
-            "16/07": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "16/07": "Feriado Municipal"
         },
         "Montes Altos": {
             "26/07": "Feriado Municipal",
-            "22/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "22/12": "Feriado Municipal"
         },
         "Nova Olinda do Maranhão": {
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Olho d'Água das Cunhãs": {
-            "30/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "30/11": "Feriado Municipal"
         },
         "Paço do Lumiar": {
             "14/01": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Paraibano": {
             "06/01": "Feriado Municipal",
-            "15/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "15/08": "Feriado Municipal"
         },
         "Parnarama": {
             "10/04": "Feriado Municipal",
             "29/06": "Feriado Municipal",
             "27/11": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Passagem Franca": {
             "20/01": "Feriado Municipal",
-            "08/05": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/05": "Feriado Municipal"
         },
         "Paulo Ramos": {
             "21/02": "Feriado Municipal",
             "21/08": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Pedreiras": {
             "27/04": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Penalva": {
-            "10/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/08": "Feriado Municipal"
         },
         "Peritoró": {
-            "22/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "22/11": "Feriado Municipal"
         },
         "Pinheiro": {
             "24/04": "Feriado Municipal",
             "31/07": "Feriado Municipal",
-            "03/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "03/09": "Feriado Municipal"
         },
         "Pio XII": {
             "29/06": "Feriado Municipal",
             "26/07": "Feriado Municipal",
             "11/08": "Feriado Municipal",
-            "19/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "19/11": "Feriado Municipal"
         },
         "Poção de Pedras": {
             "20/01": "Feriado Municipal",
-            "29/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "29/06": "Feriado Municipal"
         },
         "Porto Franco": {
             "21/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Presidente Dutra": {
             "20/01": "Feriado Municipal",
-            "28/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "28/06": "Feriado Municipal"
         },
         "Riachão": {
             "29/04": "Feriado Municipal",
-            "08/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/09": "Feriado Municipal"
         },
         "Rosário": {
             "06/04": "Feriado Municipal",
             "31/05": "Feriado Municipal",
             "29/06": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Santa Helena": {
             "18/08": "Feriado Municipal",
-            "30/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "30/09": "Feriado Municipal"
         },
         "Santa Inês": {
             "21/01": "Feriado Municipal",
-            "14/03": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "14/03": "Feriado Municipal"
         },
         "Santa Luzia": {
             "26/03": "Feriado Municipal",
             "29/06": "Feriado Municipal",
-            "13/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "13/12": "Feriado Municipal"
         },
         "Santa Luzia do Paruá": {
             "29/06": "Feriado Municipal",
-            "13/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "13/12": "Feriado Municipal"
         },
         "Santa Quitéria do Maranhão": {
             "29/06": "Feriado Municipal",
-            "08/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/09": "Feriado Municipal"
         },
         "Santa Rita": {
             "29/06": "Feriado Municipal",
-            "02/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "02/12": "Feriado Municipal"
         },
         "Santo Antônio dos Lopes": {
             "13/06": "Dia de Santo Antônio",
             "29/06": "Feriado Municipal",
-            "30/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "30/12": "Feriado Municipal"
         },
         "São Benedito do Rio Preto": {
-            "15/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "15/08": "Feriado Municipal"
         },
         "São Bento": {
             "30/03": "Feriado Municipal",
-            "16/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "16/08": "Feriado Municipal"
         },
         "São Bernardo": {
             "29/03": "Feriado Municipal",
-            "20/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "20/08": "Feriado Municipal"
         },
         "São Domingos do Maranhão": {
             "15/08": "Feriado Municipal",
-            "24/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "24/09": "Feriado Municipal"
         },
         "São Francisco do Maranhão": {
-            "10/05": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/05": "Feriado Municipal"
         },
         "São João Batista": {
             "14/06": "Feriado Municipal",
-            "24/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "24/06": "Feriado Municipal"
         },
         "São João do Carú": {
-            "24/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "24/06": "Feriado Municipal"
         },
         "São João do Paraíso": {
             "24/06": "Feriado Municipal",
-            "01/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "01/09": "Feriado Municipal"
         },
         "São João dos Patos": {
             "12/06": "Feriado Municipal",
-            "24/06": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "24/06": "Feriado Municipal"
         },
         "São José de Ribamar": {
             "19/03": "São José",
             "29/06": "Feriado Municipal",
-            "24/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "24/09": "Feriado Municipal"
         },
         "São Luís": {
             "29/06": "São Pedro",
             "08/09": "Natividade de Nossa Senhora",
-            "08/12": "Nossa Senhora da Conceição",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Nossa Senhora da Conceição"
         },
         "São Luís Gonzaga do Maranhão": {
             "12/06": "Feriado Municipal",
             "21/06": "Feriado Municipal",
-            "01/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "01/11": "Feriado Municipal"
         },
         "São Mateus do Maranhão": {
             "21/09": "Feriado Municipal",
-            "26/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "26/12": "Feriado Municipal"
         },
         "São Raimundo das Mangabeiras": {
             "10/02": "Feriado Municipal",
             "30/08": "Feriado Municipal",
-            "31/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "31/08": "Feriado Municipal"
         },
         "São Vicente Ferrer": {
             "29/06": "Feriado Municipal",
             "27/08": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Senador Alexandre Costa": {
             "31/08": "Feriado Municipal",
             "12/09": "Feriado Municipal",
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Senador La Rocque": {
             "15/08": "Feriado Municipal",
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Sítio Novo": {
             "15/07": "Feriado Municipal",
             "08/12": "Feriado Municipal",
-            "15/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "15/12": "Feriado Municipal"
         },
         "Tasso Fragoso": {
             "16/07": "Feriado Municipal",
             "08/12": "Feriado Municipal",
-            "19/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "19/12": "Feriado Municipal"
         },
         "Timbiras": {
             "05/04": "Feriado Municipal",
-            "22/05": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "22/05": "Feriado Municipal"
         },
         "Timon": {
             "19/03": "Homenagem a São José, Padroeiro do Município",
             "15/10": "Homenagem à N. S.do Rosário de Fátima",
             "08/12": "Feriado Municipal",
-            "22/12": "Aniversário da cidade",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "22/12": "Aniversário da cidade"
         },
         "Trizidela do Vale": {
             "13/06": "Dia de Santo Antônio",
-            "11/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "11/11": "Feriado Municipal"
         },
         "Tuntum": {
             "31/08": "Feriado Municipal",
-            "12/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "12/09": "Feriado Municipal"
         },
         "Turiaçu": {
             "11/07": "Feriado Municipal",
-            "03/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "03/12": "Feriado Municipal"
         },
         "Tutóia": {
             "29/03": "Feriado Municipal",
             "29/06": "Feriado Municipal",
             "08/09": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Vargem Grande": {
             "20/01": "Feriado Municipal",
             "29/03": "Feriado Municipal",
             "29/06": "Feriado Municipal",
             "22/08": "Feriado Municipal",
-            "31/08": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "31/08": "Feriado Municipal"
         },
         "Viana": {
             "08/07": "Feriado Municipal",
             "08/09": "Feriado Municipal",
-            "08/12": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/12": "Feriado Municipal"
         },
         "Vila Nova dos Martírios": {
             "01/09": "Feriado Municipal",
-            "10/11": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "10/11": "Feriado Municipal"
         },
         "Vitória do Mearim": {
             "19/04": "Feriado Municipal",
             "24/06": "Feriado Municipal",
-            "08/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "08/09": "Feriado Municipal"
         },
         "Vitorino Freire": {
             "13/05": "Feriado Municipal",
-            "25/09": "Feriado Municipal",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "25/09": "Feriado Municipal"
         },
         "Zé Doca": {
-            "13/06": "Dia de Santo Antônio",
-            "28/07": "Adesão do Maranhão à Independência do Brasil"
+            "13/06": "Dia de Santo Antônio"
         }
     },
     "PI": {
