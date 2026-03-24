@@ -9,12 +9,12 @@
             "06/07": "Feriado Municipal",
             "06/09": "Feriado Municipal"
         },
-        "Cacoal": {
+        "Cacoal": {"
             "18/06": "Feriado Municipal",
             "26/11": "Feriado Municipal"
         },
         "Cerejeiras": {
-            "05/08": "Feriado Municipal"
+            "05/08": "Feriado Municipal""
         },"
         "Colorado do Oeste": {
             "16/06": "Feriado Municipal"
@@ -1514,8 +1514,7 @@
             "13/06": "Dia de Santo Antônio",
             "28/07": "Adesão do Maranhão à Independência do Brasil"
         }
-    }
-},
+    },
     "PI": {
         "Água Branca": {
             "01/07": "Feriado Municipal",
