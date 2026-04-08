@@ -152,28 +152,7 @@ function setupEventListeners() {
     const daysRange = document.getElementById('input-days');
     const daysLabel = document.getElementById('days-value');
     const cltWarning = document.getElementById('clt-warning');
-
-    // Modal Events (Optional - only if elements exist)
-    const helpModal = document.getElementById('help-modal');
-    const openHelp = document.getElementById('open-help');
-    const closeHelp = document.getElementById('close-help');
-
-    if (openHelp && helpModal) {
-        openHelp.onclick = (e) => {
-            e.preventDefault();
-            helpModal.classList.add('open');
-        };
-    }
-
-    if (closeHelp && helpModal) {
-        closeHelp.onclick = () => helpModal.classList.remove('open');
-    }
-
-    if (helpModal) {
-        helpModal.onclick = (e) => {
-            if (e.target.classList.contains('modal-overlay')) helpModal.classList.remove('open');
-        };
-    }
+    const partialWarning = document.getElementById('partial-sale-warning');
 
     startInput.onchange = () => {
         const date = parseYmd(startInput.value);
@@ -191,11 +170,14 @@ function setupEventListeners() {
         daysLabel.textContent = val;
 
         if (val < 20) {
-            daysRange.classList.add('slider-danger');
             cltWarning.classList.remove('hidden');
-        } else {
-            daysRange.classList.remove('slider-danger');
+            partialWarning.classList.add('hidden');
+        } else if (val < 30 && val >= 21) {
             cltWarning.classList.add('hidden');
+            partialWarning.classList.remove('hidden');
+        } else {
+            cltWarning.classList.add('hidden');
+            partialWarning.classList.add('hidden');
         }
     };
 
@@ -248,34 +230,34 @@ function renderStep2() {
     document.getElementById('step-1').classList.add('hidden');
 
     container.innerHTML = `
-        <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">2</div>
-                <h3 class="text-xl font-semibold">Gerenciar Feriados</h3>
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-[#00BFA5]/10 flex items-center justify-center text-[#00BFA5] text-sm font-medium">02</div>
+                <h3 class="text-xl">Gerenciar Feriados</h3>
             </div>
-            <button id="btn-back-2" class="text-sm text-slate-400 hover:text-white flex items-center gap-1">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar
+            <button id="btn-back-2" class="text-[11px] uppercase tracking-widest text-white/40 hover:text-white flex items-center gap-2 transition-colors">
+                <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar
             </button>
         </div>
 
-        <p class="text-sm text-slate-400 mb-6">Desmarque os feriados que você deseja desconsiderar.</p>
+        <p class="text-sm text-white/40 mb-8 font-light">Desmarque os feriados que você deseja desconsiderar no cálculo.</p>
 
-        <div class="space-y-3 mb-8">
+        <div class="space-y-4 mb-10">
             ${state.holidays.length > 0 ? state.holidays.map((h, i) => `
-                <div class="flex items-center justify-between p-4 bg-slate-900/50 border border-slate-700 rounded-xl">
-                    <div class="flex flex-col">
-                        <span class="font-medium text-slate-200">${h.name}</span>
-                        <span class="text-xs text-slate-500">${h.date.toLocaleDateString('pt-BR')} • ${h.type}</span>
+                <div class="flex items-center justify-between p-5 bg-white/[0.02] border border-white/5 rounded-xl hover:border-[#00BFA5]/20 transition-colors">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-sm font-medium text-white">${h.name}</span>
+                        <span class="text-[10px] text-white/30 uppercase tracking-wider">${h.date.toLocaleDateString('pt-BR')} • ${h.type}</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" value="${i}" checked class="sr-only peer hol-toggle">
-                        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    <label class="premium-toggle">
+                        <input type="checkbox" value="${i}" checked class="hol-toggle">
+                        <span class="toggle-slider"></span>
                     </label>
                 </div>
-            `).join('') : '<p class="text-center py-8 text-slate-500">Nenhum feriado encontrado neste período.</p>'}
+            `).join('') : '<p class="text-center py-10 text-white/30 text-sm italic font-light">Nenhum feriado encontrado neste período.</p>'}
         </div>
 
-        <button id="btn-next-2" class="w-full btn-primary py-4 text-lg">
+        <button id="btn-next-2" class="w-full glass-btn btn-primary py-4 text-sm uppercase tracking-widest">
             Avançar
         </button>
     `;
@@ -358,121 +340,88 @@ function renderStep3() {
     const abonoDays = 30 - state.config.total;
     const requestedDays = state.selectedOps.reduce((acc, op) => acc + op.length, 0);
 
-    let summaryHtml = '';
-    if (state.saldo < 0.1) {
-        summaryHtml = `
-            <div class="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl space-y-4 shadow-lg shadow-emerald-500/5">
-                <div class="flex items-center gap-3 text-emerald-400">
-                    <i data-lucide="party-popper" class="w-6 h-6"></i>
-                    <h4 class="font-bold text-lg">Planejamento Completo!</h4>
-                </div>
-                
-                <div class="space-y-4 pt-2">
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-slate-400">Dias Vendidos (Abono Pecuniário):</span>
-                        <span class="font-bold text-white">${abonoDays} dias</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-slate-400">Dias de Férias para Empresa:</span>
-                        <span class="font-bold text-white">${requestedDays} dias</span>
-                    </div>
-                    <div class="flex justify-between items-center border-t border-slate-700/50 pt-2">
-                        <span class="text-slate-100 font-semibold">Dias de Folga Efetivos:</span>
-                        <span class="text-xl font-bold text-emerald-400">${totalFolga} dias</span>
-                    </div>
-                </div>
+    const isDone = state.saldo < 0.1;
 
-                <div class="p-4 bg-slate-900/50 rounded-xl border border-slate-700">
-                     <p class="text-xs text-slate-400 leading-relaxed">
-                         <i data-lucide="info" class="w-3 h-3 inline-block mr-1"></i>
-                         Além da folga, você receberá o <strong>Terço Constitucional</strong> sobre os 30 dias e o pagamento dos <strong>${abonoDays} dias</strong> de abono pecuniário.
-                     </p>
+    let metricsHtml = '';
+    if (isDone) {
+        metricsHtml = `
+            <div class="p-6 bg-white/[0.02] border border-[#00BFA5]/20 rounded-2xl space-y-6 shadow-2xl animate-fade-in">
+                <h4 class="text-[10px] font-medium text-[#00BFA5] uppercase tracking-[0.2em] text-center">Planejamento Finalizado</h4>
+                <div class="grid grid-cols-3 gap-4 py-2">
+                     <div class="text-center">
+                         <span class="block text-[10px] uppercase text-white/30 mb-1">Solicitado</span>
+                         <span class="text-2xl font-light text-white">${usedDays} <span class="text-[10px] font-light text-white/30">dias</span></span>
+                     </div>
+                     <div class="text-center">
+                         <span class="block text-[10px] uppercase text-white/30 mb-1">Folga Real</span>
+                         <span class="text-2xl font-medium text-[#00BFA5]">${totalFolga} <span class="text-[10px] font-light text-[#00BFA5]/50">dias</span></span>
+                     </div>
+                     <div class="text-center">
+                         <span class="block text-[10px] uppercase text-white/30 mb-1">Abono</span>
+                         <span class="text-2xl font-light text-white">${abonoDays} <span class="text-[10px] font-light text-white/30">dias</span></span>
+                     </div>
+                </div>
+                <div class="pt-4 border-t border-white/5 text-center">
+                    <p class="text-[10px] text-white/30 leading-relaxed font-light italic">
+                         Você receberá o Terço Constitucional sobre 30 dias + pagamento dos ${abonoDays} dias de abono.
+                    </p>
                 </div>
             </div>
         `;
     } else {
-        const availableOptions = options.slice(0, 10);
-        summaryHtml = `
-            <div class="space-y-4">
-                <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Melhores Opções</h4>
-                <div class="grid grid-cols-1 gap-4">
-                    ${availableOptions.map((op, i) => `
-                        <button class="select-op text-left op-card hover:border-blue-500/50 transition-all group relative overflow-hidden" data-idx="${i}">
-                            <div class="z-10">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="op-card-text">Tire ${op.length} dias e folgue ${op.total} dias!</span>
-                                    <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-bold rounded-full transition-transform group-hover:scale-110">+${op.gain}</span>
-                                </div>
-                                <div class="flex flex-col gap-0.5">
-                                    <p class="op-card-subtext flex items-center gap-1">
-                                        <i data-lucide="building-2" class="w-3 h-3"></i>
-                                        <strong>Empresa:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
-                                    </p>
-                                    <p class="op-card-subtext flex items-center gap-1">
-                                        <i data-lucide="calendar-heart" class="w-3 h-3"></i>
-                                        <strong>Folga:</strong> ${op.actualStart.toLocaleDateString('pt-BR')} até ${op.actualEnd.toLocaleDateString('pt-BR')}
-                                    </p>
-                                </div>
-                            </div>
-                            <i data-lucide="plus-circle" class="w-6 h-6 text-slate-600 group-hover:text-blue-500 transition-all group-hover:rotate-90"></i>
-                        </button>
-                    `).join('')}
+        metricsHtml = `
+            <div class="p-6 bg-white/[0.02] border border-white/5 rounded-2xl space-y-6">
+                <h4 class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em] text-center">Planejamento Atual</h4>
+                <div class="grid grid-cols-2 gap-8 py-2">
+                     <div class="text-center">
+                         <span class="block text-[10px] uppercase text-white/30 mb-1">Total Solicitado</span>
+                         <span class="text-3xl font-light text-white">${usedDays} <span class="text-sm font-light text-white/30">dias</span></span>
+                     </div>
+                     <div class="text-center">
+                         <span class="block text-[10px] uppercase text-white/30 mb-1">Descanso Efetivo</span>
+                         <span class="text-3xl font-light text-[#00BFA5]">${totalFolga} <span class="text-sm font-light text-[#00BFA5]/50">dias</span></span>
+                     </div>
                 </div>
             </div>
         `;
     }
 
     container.innerHTML = `
-        <div class="glass-card rounded-2xl p-8 space-y-6">
+        <div class="glass-card rounded-3xl p-10 space-y-8 ${isDone ? 'conclude-card' : ''}">
             <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">3</div>
-                    <h3 class="text-xl font-semibold">Definir Períodos</h3>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-[#00BFA5]/10 flex items-center justify-center text-[#00BFA5] text-sm font-medium">03</div>
+                    <h3 class="text-xl">${isDone ? 'Resultado Final' : 'Definir Períodos'}</h3>
                 </div>
-                <div class="text-right flex items-center gap-2">
-                    <div>
-                        <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold">Saldo</span>
-                        <span class="text-xl font-bold text-white">${usedDays}/${state.config.total} dias</span>
-                    </div>
-                    ${state.saldo === 0 ? '' : ''}
+                <div class="text-right">
+                    <span class="block text-[10px] uppercase tracking-[0.2em] text-white/30 font-medium mb-1">Saldo Remanescente</span>
+                    <span class="text-xl font-medium text-white">${state.saldo} / ${state.config.total} dias</span>
                 </div>
             </div>
 
-            ${state.selectedOps.length > 0 ? `
-                <div class="space-y-4">
-                    <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-widest text-center">Resumo do Planejamento</h4>
-                    <div class="grid grid-cols-2 gap-4 bg-blue-500/5 p-4 rounded-xl border border-blue-500/20">
-                         <div class="text-center">
-                             <span class="block text-[10px] uppercase text-slate-500">Dias de Férias Usados</span>
-                             <span class="text-2xl font-bold text-white">${usedDays}</span>
-                         </div>
-                         <div class="text-center">
-                             <span class="block text-[10px] uppercase text-slate-500">Total de Folga Real</span>
-                             <span class="text-2xl font-bold text-emerald-400">${totalFolga}</span>
-                         </div>
-                    </div>
-                </div>
-            ` : ''}
+            ${metricsHtml}
 
             ${state.selectedOps.length > 0 ? `
-                <div class="space-y-3">
-                    <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Períodos Confirmados</h4>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                         <span class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Roteiro Selecionado</span>
+                    </div>
                     ${state.selectedOps.map((op, i) => `
-                        <div class="op-card animate-fade-in group border-l-4 border-l-blue-500">
+                        <div class="op-card group border-l-2 border-[#00BFA5]/50 bg-white/[0.01]">
                             <div>
-                                <p class="op-card-text">Você tirou ${op.length} dias e folgou ${op.total} dias!</p>
-                                <div class="flex flex-col gap-0.5 mt-1">
-                                    <p class="op-card-subtext flex items-center gap-1">
+                                <p class="text-sm font-medium text-white">${op.length} dias de férias</p>
+                                <div class="flex flex-col gap-1 mt-2">
+                                    <p class="text-[11px] text-white/30 flex items-center gap-2">
                                         <i data-lucide="building-2" class="w-3 h-3"></i> 
-                                        <strong>Empresa:</strong> ${op.start.toLocaleDateString('pt-BR')} até ${op.end.toLocaleDateString('pt-BR')}
+                                        RH: ${op.start.toLocaleDateString('pt-BR')} — ${op.end.toLocaleDateString('pt-BR')}
                                     </p>
-                                    <p class="op-card-subtext flex items-center gap-1">
+                                    <p class="text-[11px] text-white/30 flex items-center gap-2">
                                         <i data-lucide="calendar-heart" class="w-3 h-3"></i> 
-                                        <strong>Folga:</strong> ${op.actualStart.toLocaleDateString('pt-BR')} até ${op.actualEnd.toLocaleDateString('pt-BR')}
+                                        Folga real: ${op.actualStart.toLocaleDateString('pt-BR')} — ${op.actualEnd.toLocaleDateString('pt-BR')}
                                     </p>
                                 </div>
                             </div>
-                            <button class="remove-op text-slate-600 hover:text-red-400 transition-colors" data-idx="${i}">
+                            <button class="remove-op p-2 text-white/10 hover:text-red-400 transition-colors" data-idx="${i}">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -480,11 +429,38 @@ function renderStep3() {
                 </div>
             ` : ''}
 
-            ${summaryHtml}
+            ${!isDone ? `
+                <div class="space-y-6">
+                    <h4 class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em] text-center">Melhores Sugestões</h4>
+                    <div class="grid grid-cols-1 gap-4">
+                        ${options.slice(0, 5).map((op, i) => `
+                            <button class="select-op text-left op-card glass-card-interactive group relative overflow-hidden" data-idx="${i}">
+                                <div class="z-10">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-sm font-medium text-white">Tire ${op.length} dias e folgue ${op.total}!</span>
+                                        <span class="px-2 py-0.5 bg-[#00BFA5]/10 text-[#00BFA5] text-[10px] font-medium rounded-full">+${op.gain} extra</span>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <p class="text-[11px] text-white/30 flex items-center gap-2">
+                                            <i data-lucide="building-2" class="w-3 h-3"></i>
+                                            Sugestão RH: ${op.start.toLocaleDateString('pt-BR')} — ${op.end.toLocaleDateString('pt-BR')}
+                                        </p>
+                                        <p class="text-[11px] text-white/30 flex items-center gap-2">
+                                            <i data-lucide="calendar-heart" class="w-3 h-3"></i>
+                                            Período de folga: ${op.actualStart.toLocaleDateString('pt-BR')} — ${op.actualEnd.toLocaleDateString('pt-BR')}
+                                        </p>
+                                    </div>
+                                </div>
+                                <i data-lucide="plus-circle" class="w-5 h-5 text-white/10 group-hover:text-[#00BFA5] transition-all"></i>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
 
-            <div class="pt-6 border-t border-slate-700/50 flex gap-4">
-                <button id="btn-restart" class="flex-1 btn-secondary py-3 flex items-center justify-center gap-2">
-                    Recomeçar
+            <div class="pt-10 border-t border-white/5 flex gap-4">
+                <button id="btn-restart" class="flex-1 glass-btn py-3 uppercase tracking-widest text-[11px]">
+                    Resetar e Recalcular
                 </button>
             </div>
         </div>
@@ -495,6 +471,7 @@ function renderStep3() {
             const idx = parseInt(btn.dataset.idx);
             const op = options[idx];
             state.selectedOps.push(op);
+            state.selectedOps.sort((a, b) => a.start - b.start);
             state.saldo -= op.length;
             renderStep3();
         };

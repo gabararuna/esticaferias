@@ -17,158 +17,143 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- AdSense Placeholder (Header) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4059018857698196"
-        crossorigin="anonymous"></script>
 </head>
 
 <body class="min-h-screen flex flex-col">
+    <!-- Orb Background -->
+    <div class="orb-container"></div>
+
     <!-- Glass Header -->
-    <header class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <a href="https://portfolio.gabrielararuna.com"
-                class="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-sm font-medium text-slate-300 hover:text-white">
-                <i data-lucide="arrow-left" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i>
-            </a>
-            <a href="index.html" class="text-xl font-bold tracking-tight text-white hover:opacity-90 transition-opacity">Estica Férias</a>
+    <header class="glass-header sticky top-0 z-50 flex justify-between items-center">
+        <div class="px-6 py-4">
+            <a href="index.html"
+                class="text-lg font-medium tracking-tight text-white hover:opacity-90 transition-opacity">Estica
+                Férias</a>
         </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="index.html" class="text-white border-b-2 border-blue-500 pb-1">Início</a>
-            <a href="metodologia.html" class="text-slate-400 hover:text-white transition-colors">Metodologia</a>
-            <a href="faq.html" class="text-slate-400 hover:text-white transition-colors">FAQ</a>
+
+        <nav class="hidden md:flex items-center gap-10 px-8">
+            <a href="index.html" class="nav-link active">Início</a>
+            <a href="metodologia.html" class="nav-link">Metodologia</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
         </nav>
-        <div class="md:hidden">
-            <!-- Mobile Menu Toggle could go here, but for now just simple links or a compact menu -->
-            <button class="text-slate-400" id="mobile-menu-btn">
+
+        <div class="px-6 py-4">
+            <button class="md:hidden text-white/60 hover:text-white transition-colors" id="mobile-menu-btn">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
+            <a href="https://portfolio.gabrielararuna.com"
+                class="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-[10px] font-medium text-white/40 hover:text-white uppercase tracking-widest">
+                Criado por Numera <i data-lucide="arrow-right" class="w-3 h-3"></i>
+            </a>
         </div>
     </header>
 
-    <main class="flex-1 max-w-4xl mx-auto w-full px-6 py-12 space-y-12">
+    <main class="flex-1 max-w-4xl mx-auto w-full px-6 pt-12 pb-20">
         <!-- Hero Section -->
-        <section id="hero-section" class="text-center space-y-6">
-            <h2 class="text-4xl md:text-6xl font-bold leading-tight">
-                Transforme suas férias <br>
-                <span class="text-gradient">em folgas inesquecíveis</span>
-            </h2>
-            <p class="text-slate-400 max-w-xl mx-auto text-lg">
+        <section id="hero-section" class="text-center space-y-6 mb-16">
+            <h1 class="text-5xl md:text-7xl font-medium leading-[1.1] shimmer-text">
+                Maximize suas férias <br>
+                <span class="text-gradient">de forma inteligente</span>
+            </h1>
+            <p class="text-white/40 max-w-xl mx-auto text-lg font-light leading-relaxed">
                 Otimizamos o seu calendário para você aproveitar feriados e finais de semana para esticar suas férias
                 sem gastar dias extras.
             </p>
         </section>
 
-        <!-- Main AdSense Slot -->
-        <div id="top-ads" class="ads-container">
-            <div class="ad-placeholder">Anúncio Superior</div>
-        </div>
-
         <!-- Multi-step Multi-step Container -->
-        <div id="app-container" class="space-y-8">
+        <div id="app-container" class="space-y-10">
             <!-- Step 1: Configuration -->
-            <div id="step-1" class="glass-card rounded-2xl p-8 space-y-6">
-                <div class="flex items-center gap-3">
+            <div id="step-1" class="glass-card rounded-2xl p-10 space-y-8">
+                <div class="flex items-center gap-4">
                     <div
-                        class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">
-                        1</div>
-                    <h3 class="text-xl font-semibold">Configuração do Período</h3>
+                        class="w-10 h-10 rounded-full bg-[#00BFA5]/10 flex items-center justify-center text-[#00BFA5] text-xs font-medium tracking-widest">
+                        01</div>
+                    <h3 class="text-xl font-medium">Configuração do Período</h3>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-slate-400">Início do Período</label>
-                        <input type="date" id="input-start"
-                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Início do
+                            Período</label>
+                        <input type="date" id="input-start" class="w-full">
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-slate-400">Fim do Período</label>
-                        <input type="date" id="input-end"
-                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors">
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Fim do
+                            Período</label>
+                        <input type="date" id="input-end" class="w-full">
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-slate-400">Estado</label>
-                        <select id="select-state"
-                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors cursor-pointer">
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Estado</label>
+                        <select id="select-state" class="w-full">
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium text-slate-400">Cidade</label>
-                        <select id="select-city"
-                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-colors cursor-pointer">
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Cidade</label>
+                        <select id="select-city" class="w-full">
                             <option value="">Selecione o estado primeiro...</option>
                         </select>
                     </div>
-                    <div class="space-y-2 md:col-span-2">
-                        <label class="text-sm font-medium text-slate-400">Saldo de Férias</label>
+                    <div class="space-y-4 md:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Saldo de
+                                Férias</label>
+                            <span id="days-value" class="text-xl font-medium text-[#00BFA5]">30</span>
+                        </div>
                         <div class="flex items-center gap-4">
-                            <input id="input-days" type="range" min="5" max="30" value="30"
-                                class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
-                            <span id="days-value" class="text-2xl font-bold w-12 text-center text-blue-400">30</span>
+                            <input id="input-days" type="range" min="5" max="30" value="30" class="w-full">
                         </div>
                         <p id="clt-warning"
-                            class="text-[11px] text-red-100 font-medium hidden mt-4 animate-fade-in text-center bg-red-500/10 py-3 px-4 rounded-2xl border border-red-500/20 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                            class="text-[10px] text-[#b51212] font-medium hidden mt-4 animate-fade-in text-center bg-[#b51212]/5 py-3 px-4 rounded-xl border border-[#b51212]/10 uppercase tracking-widest">
                             Pela CLT você só pode vender no máximo 10 dias!
+                        </p>
+                        <p id="partial-sale-warning"
+                            class="text-[10px] text-[#00BFA5] font-medium hidden mt-4 animate-fade-in text-center bg-[#00BFA5]/5 py-3 px-4 rounded-xl border border-[#00BFA5]/10 uppercase tracking-widest leading-relaxed">
+                            Algumas empresas não permitem a venda parcial, verifique com seu RH antes de planejar!
                         </p>
                     </div>
                 </div>
 
-                <button id="btn-next-1" class="w-full btn-primary py-4 text-lg">
-                    Avançar
+                <button id="btn-next-1"
+                    class="w-full glass-btn btn-primary py-5 text-[11px] uppercase tracking-[0.2em]">
+                    Iniciar Planejamento
                 </button>
             </div>
 
             <!-- Step 2: Manage Holidays (Hidden initially) -->
-            <div id="step-2" class="hidden glass-card rounded-2xl p-8 space-y-6">
-                <!-- Logic for Step 2 will be injected via JS -->
+            <div id="step-2" class="hidden glass-card rounded-2xl p-10 space-y-8">
+                <!-- Logic for Step 2 -->
             </div>
 
             <!-- Step 3: Suggestions (Hidden initially) -->
-            <div id="step-3" class="hidden space-y-6">
-                <!-- Results will be injected via JS -->
+            <div id="step-3" class="hidden space-y-8">
+                <!-- Results -->
             </div>
-        </div>
-
-        <!-- Bottom AdSense Slot -->
-        <div id="bottom-ads" class="ads-container">
-            <div class="ad-placeholder">Anúncio Inferior</div>
         </div>
     </main>
 
-    <footer class="border-t border-slate-800 py-12 px-6 bg-slate-950/50 mt-auto">
+    <footer class="footer-minimalist">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex flex-col items-center md:items-start gap-2">
-                <span class="font-bold text-white text-lg">Estica Férias</span>
-                <p class="text-slate-500 text-sm italic">© 2024 Estica Férias. Todos os direitos reservados.</p>
-            </div>
-            
-            <nav class="flex gap-6 text-sm font-medium text-slate-400">
-                <a href="privacidade.html" class="hover:text-white transition-colors">Política de Privacidade</a>
-                <a href="termos.html" class="hover:text-white transition-colors">Termos de Uso</a>
-            </nav>
+            <p class="text-[10px] text-white/20 uppercase tracking-[0.2em]">© 2024 Estica Férias. Todos os direitos
+                reservados.</p>
 
-            <div class="flex gap-4 text-slate-400">
-                <a href="#" class="hover:text-white transition-colors"><i data-lucide="instagram"
-                        class="w-5 h-5"></i></a>
-                <a href="#" class="hover:text-white transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-            </div>
+            <nav class="flex gap-8">
+                <a href="privacidade.html" class="footer-link">Privacidade</a>
+                <a href="termos.html" class="footer-link">Termos</a>
+            </nav>
         </div>
     </footer>
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu">
-        <button id="close-mobile-menu" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors p-2">
+        <button id="close-mobile-menu" class="absolute top-8 right-8 text-white/60 hover:text-white transition-colors">
             <i data-lucide="x" class="w-8 h-8"></i>
         </button>
-        <nav class="flex flex-col items-center gap-8">
+        <nav class="flex flex-col items-center">
             <a href="index.html" class="mobile-nav-link active">Início</a>
             <a href="metodologia.html" class="mobile-nav-link">Metodologia</a>
             <a href="faq.html" class="mobile-nav-link">FAQ</a>
-            <div class="flex gap-6 mt-8">
-                <a href="privacidade.html" class="text-slate-500 hover:text-white text-sm">Privacidade</a>
-                <a href="termos.html" class="text-slate-500 hover:text-white text-sm">Termos</a>
-            </div>
         </nav>
     </div>
 
