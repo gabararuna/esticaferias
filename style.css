@@ -97,6 +97,154 @@ body {
   animation: conclude-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* --- Welcome Screen --- */
+.welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1.5rem;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.welcome-screen.fade-out {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+.welcome-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.welcome-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 80%, rgba(0,191,165,0.14) 0%, transparent 70%);
+}
+
+.welcome-bg-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background-image:
+    linear-gradient(rgba(0,191,165,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,191,165,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.welcome-orb {
+  position: absolute;
+  width: clamp(300px, 50vw, 600px);
+  height: clamp(300px, 50vw, 600px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.8s ease, top 0.8s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 191, 165, 0.35) 0%, rgba(0, 191, 165, 0.2) 40%, transparent 70%);
+  animation: orb-spin 4s ease-in-out infinite;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 10;
+  max-width: 36rem;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #00BFA5;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.welcome-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 191, 165, 0.4);
+  box-shadow: 0 0 20px rgba(0, 191, 165, 0.25);
+  transform: translateY(-2px);
+}
+
+.welcome-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  animation: fadeIn 0.8s ease-out 0.1s both;
+}
+
+.welcome-subtitle {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.6;
+  max-width: 28rem;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.7s ease-out 0.2s both;
+}
+
+.welcome-cta {
+  animation: fadeIn 0.7s ease-out 0.3s both;
+  font-size: 0.875rem;
+  padding: 0.8rem 2.25rem;
+  background: linear-gradient(135deg, rgba(0, 191, 165, 0.25) 0%, rgba(0, 191, 165, 0.1) 100%) !important;
+  border-color: rgba(0, 191, 165, 0.4) !important;
+  box-shadow: 0 4px 24px rgba(0, 191, 165, 0.2), inset 0 1px 0 rgba(0, 191, 165, 0.2) !important;
+  color: white !important;
+}
+
+.welcome-cta:hover {
+  background: linear-gradient(135deg, rgba(0, 191, 165, 0.35) 0%, rgba(0, 191, 165, 0.2) 100%) !important;
+  box-shadow: 0 8px 40px rgba(0, 191, 165, 0.35), inset 0 1px 0 rgba(0, 191, 165, 0.3) !important;
+  transform: translateY(-2px);
+}
+
+.shimmer-teal {
+  background: linear-gradient(90deg, #00BFA5 0%, #00E6C7 25%, #00BFA5 50%, #00E6C7 75%, #00BFA5 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 6s linear infinite;
+}
+
+.numera-badge-link {
+  color: #00BFA5;
+}
+
+.numera-badge-link:hover {
+  box-shadow: 0 0 20px rgba(0, 191, 165, 0.25);
+}
+
 /* --- Background Effects --- */
 .orb-container {
   position: fixed;

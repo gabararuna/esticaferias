@@ -1,5 +1,27 @@
 import * as logic from './logic.js';
 
+// --- Welcome Screen ---
+(function setupWelcome() {
+    const screen = document.getElementById('welcome-screen');
+    const cta = document.getElementById('welcome-cta');
+    const orb = document.getElementById('welcome-orb');
+
+    if (!screen || !cta) return;
+
+    document.addEventListener('mousemove', (e) => {
+        if (screen.classList.contains('fade-out')) return;
+        orb.style.left = `${(e.clientX / window.innerWidth) * 100}%`;
+        orb.style.top = `${(e.clientY / window.innerHeight) * 100}%`;
+    });
+
+    cta.addEventListener('click', () => {
+        screen.classList.add('fade-out');
+        setTimeout(() => {
+            screen.style.display = 'none';
+        }, 500);
+    });
+})();
+
 // --- Constants ---
 const CAPITALS = {
     'AC': 'Rio Branco', 'AL': 'Maceió', 'AP': 'Macapá', 'AM': 'Manaus',
