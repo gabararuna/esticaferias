@@ -1,5 +1,5 @@
-/* 
- * Estica Férias - Premium Design System (Refined)
+/*
+ * Estica Férias - Premium Design System
  * Integrated with Numera Visual Model - Pure Teal & Minimalist
  */
 
@@ -7,10 +7,8 @@
 
 :root {
   --bg-main: #000000;
-  --bg-card: rgba(255, 255, 255, 0.04);
   --accent-teal: #00BFA5;
-  --accent-teal-glow: rgba(0, 191, 165, 0.2);
-  --accent-gray: #8E8E93;
+  --accent-teal-hover: #00E6C7;
   --text-main: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.4);
   --glass-border: rgba(255, 255, 255, 0.08);
@@ -34,59 +32,36 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  min-height: 100vh;
   font-weight: 300;
-  /* Light by default */
 }
 
-/* --- Animations --- */
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 
-  100% {
-    background-position: -200% 0;
-  }
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes orb-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.65; }
 }
 
 @keyframes orb-spin {
-
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.4;
-  }
-
-  50% {
-    transform: scale(1.05);
-    opacity: 0.6;
-  }
+  0%, 100% { transform: scale(1);    opacity: 0.4; }
+  50%       { transform: scale(1.05); opacity: 0.6; }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes conclude-pop {
-  0% {
-    transform: scale(0.98);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-    filter: drop-shadow(0 0 15px rgba(0, 191, 165, 0.2));
-  }
+  0%   { transform: scale(0.98); opacity: 0; }
+  100% { transform: scale(1);    opacity: 1; filter: drop-shadow(0 0 15px rgba(0,191,165,0.2)); }
 }
 
 .animate-fade-in {
@@ -97,18 +72,55 @@ body {
   animation: conclude-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* --- Welcome Screen --- */
+/* ============================================================
+   SHIMMER TEXT
+   ============================================================ */
+
+.shimmer-text {
+  background: linear-gradient(90deg, #ffffff 0%, #a0a0a0 25%, #ffffff 50%, #a0a0a0 75%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 8s linear infinite;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.shimmer-teal {
+  background: linear-gradient(90deg, #00BFA5 0%, #00E6C7 25%, #00BFA5 50%, #00E6C7 75%, #00BFA5 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 6s linear infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #8E8E93 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 500;
+}
+
+/* ============================================================
+   WELCOME SCREEN
+   Block element — takes full viewport height on load.
+   App body (#app-body) is hidden until dismissed.
+   ============================================================ */
+
 .welcome-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: #000;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   padding: 1.5rem;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  background: #000;
+  transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 .welcome-screen.fade-out {
@@ -117,16 +129,12 @@ body {
   pointer-events: none;
 }
 
-.welcome-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
+/* Background layers (absolute within the welcome block) */
 .welcome-bg-gradient {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 70% 50% at 50% 80%, rgba(0,191,165,0.14) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .welcome-bg-grid {
@@ -137,8 +145,10 @@ body {
     linear-gradient(rgba(0,191,165,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,191,165,0.04) 1px, transparent 1px);
   background-size: 80px 80px;
+  pointer-events: none;
 }
 
+/* Mouse-following orb — no transform-animation so JS can reposition freely */
 .welcome-orb {
   position: absolute;
   width: clamp(300px, 50vw, 600px);
@@ -150,10 +160,11 @@ body {
   pointer-events: none;
   mix-blend-mode: screen;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0, 191, 165, 0.35) 0%, rgba(0, 191, 165, 0.2) 40%, transparent 70%);
-  animation: orb-spin 4s ease-in-out infinite;
+  background: radial-gradient(ellipse, rgba(0,191,165,0.35) 0%, rgba(0,191,165,0.18) 40%, transparent 70%);
+  animation: orb-pulse 4s ease-in-out infinite;
 }
 
+/* Content block */
 .welcome-content {
   position: relative;
   z-index: 10;
@@ -165,6 +176,7 @@ body {
   align-items: center;
 }
 
+/* Badge link */
 .welcome-badge {
   display: inline-flex;
   align-items: center;
@@ -193,6 +205,7 @@ body {
   transform: translateY(-2px);
 }
 
+/* Title */
 .welcome-title {
   font-size: clamp(3rem, 8vw, 5rem);
   line-height: 1;
@@ -202,6 +215,7 @@ body {
   animation: fadeIn 0.8s ease-out 0.1s both;
 }
 
+/* Subtitle */
 .welcome-subtitle {
   font-size: 0.9rem;
   font-weight: 300;
@@ -212,40 +226,174 @@ body {
   animation: fadeIn 0.7s ease-out 0.2s both;
 }
 
-.welcome-cta {
-  animation: fadeIn 0.7s ease-out 0.3s both;
-  font-size: 0.875rem;
+/* CTA button — standalone, no conflicting base classes */
+.welcome-start-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 191, 165, 0.4);
   padding: 0.8rem 2.25rem;
-  background: linear-gradient(135deg, rgba(0, 191, 165, 0.25) 0%, rgba(0, 191, 165, 0.1) 100%) !important;
-  border-color: rgba(0, 191, 165, 0.4) !important;
-  box-shadow: 0 4px 24px rgba(0, 191, 165, 0.2), inset 0 1px 0 rgba(0, 191, 165, 0.2) !important;
-  color: white !important;
+  background: linear-gradient(135deg, rgba(0,191,165,0.25) 0%, rgba(0,191,165,0.1) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,191,165,0.2), inset 0 1px 0 rgba(0,191,165,0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: fadeIn 0.7s ease-out 0.3s both;
 }
 
-.welcome-cta:hover {
-  background: linear-gradient(135deg, rgba(0, 191, 165, 0.35) 0%, rgba(0, 191, 165, 0.2) 100%) !important;
-  box-shadow: 0 8px 40px rgba(0, 191, 165, 0.35), inset 0 1px 0 rgba(0, 191, 165, 0.3) !important;
+.welcome-start-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.welcome-start-btn:hover {
+  border-color: rgba(0, 191, 165, 0.6);
+  background: linear-gradient(135deg, rgba(0,191,165,0.35) 0%, rgba(0,191,165,0.2) 100%);
+  box-shadow: 0 8px 40px rgba(0,191,165,0.35), inset 0 1px 0 rgba(0,191,165,0.3), 0 0 80px rgba(0,191,165,0.15);
   transform: translateY(-2px);
 }
 
-.shimmer-teal {
-  background: linear-gradient(90deg, #00BFA5 0%, #00E6C7 25%, #00BFA5 50%, #00E6C7 75%, #00BFA5 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 6s linear infinite;
+.welcome-start-btn:hover::before {
+  left: 100%;
 }
 
-.numera-badge-link {
+/* App body: hidden until welcome is dismissed */
+.app-body-hidden {
+  display: none;
+}
+
+.app-body-visible {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   HEADER NUMERA BADGE
+   ============================================================ */
+
+.numera-header-badge {
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #00BFA5;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.numera-badge-link:hover {
-  box-shadow: 0 0 20px rgba(0, 191, 165, 0.25);
+.numera-header-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 191, 165, 0.4);
+  box-shadow: 0 0 20px rgba(0, 191, 165, 0.2);
+  transform: translateY(-1px);
 }
 
-/* --- Background Effects --- */
+/* ============================================================
+   PERSISTENT APP HEADER (mirrors Remunera's header pattern)
+   ============================================================ */
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.app-author-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  padding: 7px 16px;
+  color: #00BFA5;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-author-btn:hover {
+  color: #00E6C7;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 191, 165, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 191, 165, 0.2), 0 0 40px rgba(0, 191, 165, 0.1);
+}
+
+.app-title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  line-height: 1.6;
+}
+
+/* Step progress bars (Remunera style) */
+.app-step-bars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2.5rem;
+}
+
+.app-step-bar {
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.app-step-bar.active {
+  background: #00BFA5;
+  box-shadow: 0 0 15px rgba(0, 191, 165, 0.3);
+}
+
+/* ============================================================
+   BACKGROUND ORB (app view)
+   ============================================================ */
+
 .orb-container {
   position: fixed;
   top: 0;
@@ -270,7 +418,7 @@ body {
   height: 50vw;
   top: -15%;
   right: -10%;
-  background: radial-gradient(circle, rgba(0, 191, 165, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,191,165,0.12) 0%, transparent 70%);
 }
 
 .orb-container::after {
@@ -278,44 +426,28 @@ body {
   height: 70vw;
   bottom: -20%;
   left: -25%;
-  background: radial-gradient(circle, rgba(0, 191, 165, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,191,165,0.08) 0%, transparent 70%);
   animation-delay: -4s;
 }
 
-/* --- Typography --- */
-h1,
-h2,
-h3,
-h4 {
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+h1, h2, h3, h4 {
   font-weight: 500;
 }
 
-.shimmer-text {
-  background: linear-gradient(90deg, #ffffff 0%, #a0a0a0 25%, #ffffff 50%, #a0a0a0 75%, #ffffff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 8s linear infinite;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
+/* ============================================================
+   HEADER
+   ============================================================ */
 
-.text-gradient {
-  background: linear-gradient(135deg, #fff 0%, var(--accent-gray) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 500;
-}
-
-/* --- Components --- */
 .glass-header {
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
-  padding: 1rem 1.5rem !important;
+  padding: 1rem 1.5rem;
 }
 
 .nav-link {
@@ -325,6 +457,7 @@ h4 {
   font-size: 0.8125rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .nav-link:hover,
@@ -343,7 +476,10 @@ h4 {
   box-shadow: 0 0 8px var(--accent-teal);
 }
 
-/* --- Hamburger Menu --- */
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+
 #mobile-menu {
   position: fixed;
   inset: 0;
@@ -379,7 +515,10 @@ h4 {
   transform: scale(1.1);
 }
 
-/* --- Redesigned Footer --- */
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
 .footer-minimalist {
   background: transparent;
   border-top: 1px solid var(--glass-border);
@@ -393,15 +532,19 @@ h4 {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-decoration: none;
 }
 
 .footer-link:hover {
   color: #fff;
 }
 
-/* --- Glass Elements --- */
+/* ============================================================
+   GLASS COMPONENTS
+   ============================================================ */
+
 .glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
@@ -410,9 +553,9 @@ h4 {
 }
 
 .glass-card-interactive:hover {
-  background: linear-gradient(135deg, rgba(0, 191, 165, 0.08) 0%, rgba(0, 191, 165, 0.03) 100%);
+  background: linear-gradient(135deg, rgba(0,191,165,0.08) 0%, rgba(0,191,165,0.03) 100%);
   border-color: var(--glass-border-hover);
-  box-shadow: 0 8px 32px rgba(0, 191, 165, 0.1);
+  box-shadow: 0 8px 32px rgba(0,191,165,0.1);
   transform: translateY(-2px);
 }
 
@@ -426,19 +569,14 @@ h4 {
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 0.75rem 2rem;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: white;
   text-decoration: none;
-  box-shadow:
-    0 4px 24px rgba(0, 191, 165, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 24px rgba(0,191,165,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-family: 'Inter', sans-serif;
   font-weight: 300;
   font-size: 0.8125rem;
   letter-spacing: 0.025em;
@@ -451,21 +589,15 @@ h4 {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   transition: left 0.6s ease;
   z-index: 1;
 }
 
 .glass-btn:hover {
   border-color: rgba(0, 191, 165, 0.4);
-  background: linear-gradient(
-    135deg,
-    rgba(0, 191, 165, 0.12) 0%,
-    rgba(0, 191, 165, 0.06) 100%
-  );
-  box-shadow:
-    0 8px 40px rgba(0, 191, 165, 0.25),
-    inset 0 1px 0 rgba(0, 191, 165, 0.2);
+  background: linear-gradient(135deg, rgba(0,191,165,0.12) 0%, rgba(0,191,165,0.06) 100%);
+  box-shadow: 0 8px 40px rgba(0,191,165,0.25), inset 0 1px 0 rgba(0,191,165,0.2);
   transform: translateY(-2px);
 }
 
@@ -474,27 +606,22 @@ h4 {
 }
 
 .btn-primary {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 191, 165, 0.2) 0%,
-    rgba(0, 191, 165, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(0,191,165,0.2) 0%, rgba(0,191,165,0.1) 100%);
   border: 1px solid rgba(0, 191, 165, 0.35);
   color: white;
   font-weight: 400;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 191, 165, 0.3) 0%,
-    rgba(0, 191, 165, 0.2) 100%
-  );
+  background: linear-gradient(135deg, rgba(0,191,165,0.3) 0%, rgba(0,191,165,0.2) 100%);
   border-color: rgba(0, 191, 165, 0.55);
-  box-shadow: 0 8px 32px rgba(0, 191, 165, 0.25);
+  box-shadow: 0 8px 32px rgba(0,191,165,0.25);
 }
 
-/* --- Form Elements --- */
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+
 input[type="date"],
 select {
   background: rgba(255, 255, 255, 0.02) !important;
@@ -504,12 +631,14 @@ select {
   padding: 0.625rem 0.875rem !important;
   transition: all 0.3s ease !important;
   font-size: 0.875rem !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 input[type="date"]:focus,
 select:focus {
   border-color: var(--accent-teal) !important;
   box-shadow: 0 0 0 1px var(--accent-teal) !important;
+  outline: none !important;
 }
 
 input[type="range"] {
@@ -528,7 +657,10 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-/* --- Result Cards --- */
+/* ============================================================
+   RESULT CARDS
+   ============================================================ */
+
 .op-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--glass-border);
@@ -544,7 +676,10 @@ input[type="range"]::-webkit-slider-thumb {
   border-color: var(--glass-border-hover);
 }
 
-/* --- Premium Toggle --- */
+/* ============================================================
+   PREMIUM TOGGLE
+   ============================================================ */
+
 .premium-toggle {
   position: relative;
   display: inline-block;
@@ -561,10 +696,7 @@ input[type="range"]::-webkit-slider-thumb {
 .toggle-slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-color: rgba(255, 255, 255, 0.05);
   transition: .4s;
   border-radius: 20px;
@@ -583,17 +715,20 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
 }
 
-input:checked+.toggle-slider {
+input:checked + .toggle-slider {
   background-color: var(--accent-teal);
   border-color: var(--accent-teal);
 }
 
-input:checked+.toggle-slider:before {
+input:checked + .toggle-slider:before {
   transform: translateX(18px);
   background-color: #000;
 }
 
-/* --- Custom Scrollbar --- */
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -607,8 +742,6 @@ input:checked+.toggle-slider:before {
   border-radius: 3px;
 }
 
-/* Modal Overlay Fix */
-#mobile-menu {
-  background: rgba(0, 0, 0, 0.98);
-  backdrop-filter: blur(20px);
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 191, 165, 0.4);
 }

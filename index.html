@@ -19,15 +19,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body class="min-h-screen flex flex-col">
-    <!-- Welcome Screen -->
+<body>
+    <!-- ========== WELCOME SCREEN ========== -->
     <div id="welcome-screen" class="welcome-screen">
-        <div class="welcome-bg">
-            <div class="welcome-bg-gradient"></div>
-            <div class="welcome-bg-grid"></div>
-        </div>
+        <!-- Background effects -->
+        <div class="welcome-bg-gradient"></div>
+        <div class="welcome-bg-grid"></div>
+
+        <!-- Mouse-responsive orb -->
         <div id="welcome-orb" class="welcome-orb"></div>
 
+        <!-- Content -->
         <div class="welcome-content">
             <a href="https://www.gruponumera.com" target="_blank" rel="noopener noreferrer" class="welcome-badge">
                 Desenvolvido por Numera
@@ -36,153 +38,126 @@
             <p class="welcome-subtitle">
                 Maximize seus dias de descanso cruzando feriados com seu saldo de férias.
             </p>
-            <button id="welcome-cta" class="glass-btn btn-primary welcome-cta">
-                Começar →
+            <button id="welcome-cta" class="welcome-start-btn">
+                Começar
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
             </button>
         </div>
     </div>
 
-    <!-- Orb Background -->
-    <div class="orb-container"></div>
+    <!-- ========== APP (hidden until welcome is dismissed) ========== -->
+    <div id="app-body" class="app-body-hidden">
+        <!-- Orb Background -->
+        <div class="orb-container"></div>
 
-    <!-- Glass Header -->
-    <header class="glass-header sticky top-0 z-50 flex justify-between items-center">
-        <div class="px-6 py-4">
-            <a href="index.html"
-                class="text-lg font-medium tracking-tight text-white hover:opacity-90 transition-opacity">Estica
-                Férias</a>
-        </div>
+        <main class="flex-1 max-w-4xl mx-auto w-full px-6 pt-12 pb-20">
+            <!-- Persistent header (always visible above steps) -->
+            <header class="app-header" id="app-header">
+                <a href="https://www.gruponumera.com" target="_blank" rel="noopener noreferrer" class="app-author-btn">
+                    Desenvolvido por Numera
+                </a>
+                <h1 class="shimmer-gray app-title">Estica Férias</h1>
+                <p class="app-subtitle">Maximize seus dias de descanso cruzando feriados com seu saldo de férias.</p>
+                <div class="app-step-bars">
+                    <div class="app-step-bar active" id="bar-1"></div>
+                    <div class="app-step-bar" id="bar-2"></div>
+                    <div class="app-step-bar" id="bar-3"></div>
+                </div>
+            </header>
 
-        <nav class="hidden md:flex items-center gap-10 px-8">
-            <a href="index.html" class="nav-link active">Início</a>
-            <a href="metodologia.html" class="nav-link">Metodologia</a>
-            <a href="faq.html" class="nav-link">FAQ</a>
-        </nav>
+            <!-- Multi-step Container -->
+            <div id="app-container" class="space-y-10">
+                <!-- Step 1: Configuration -->
+                <div id="step-1" class="glass-card rounded-2xl p-10 space-y-8">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#00BFA5]/10 flex items-center justify-center text-[#00BFA5] text-xs font-medium tracking-widest">
+                            01</div>
+                        <h3 class="text-xl font-medium">Configuração do Período</h3>
+                    </div>
 
-        <div class="px-6 py-4">
-            <button class="md:hidden text-white/60 hover:text-white transition-colors" id="mobile-menu-btn">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-            <a href="https://www.gruponumera.com" target="_blank" rel="noopener noreferrer"
-                class="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] font-semibold uppercase tracking-widest transition-all duration-300 hover:bg-white/10 hover:border-[#00BFA5]/40 hover:-translate-y-0.5 numera-badge-link">
-                Desenvolvido por Numera
-            </a>
-        </div>
-    </header>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Início do
+                                Período</label>
+                            <input type="date" id="input-start" class="w-full">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Fim do
+                                Período</label>
+                            <input type="date" id="input-end" class="w-full">
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Estado</label>
+                            <select id="select-state" class="w-full">
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Cidade</label>
+                            <select id="select-city" class="w-full">
+                                <option value="">Selecione o estado primeiro...</option>
+                            </select>
+                        </div>
+                        <div class="space-y-4 md:col-span-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Saldo de
+                                    Férias</label>
+                                <span id="days-value" class="text-xl font-medium text-[#00BFA5]">30</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <input id="input-days" type="range" min="5" max="30" value="30" class="w-full">
+                            </div>
+                            <p id="clt-warning"
+                                class="text-[10px] text-[#b51212] font-medium hidden mt-4 animate-fade-in text-center bg-[#b51212]/5 py-3 px-4 rounded-xl border border-[#b51212]/10 uppercase tracking-widest">
+                                Pela CLT você só pode vender no máximo 10 dias!
+                            </p>
+                            <p id="partial-sale-warning"
+                                class="text-[10px] text-[#00BFA5] font-medium hidden mt-4 animate-fade-in text-center bg-[#00BFA5]/5 py-3 px-4 rounded-xl border border-[#00BFA5]/10 uppercase tracking-widest leading-relaxed">
+                                Algumas empresas não permitem a venda parcial, verifique com seu RH antes de planejar!
+                            </p>
+                        </div>
+                    </div>
 
-    <main class="flex-1 max-w-4xl mx-auto w-full px-6 pt-12 pb-20">
-        <!-- Hero Section -->
-        <section id="hero-section" class="text-center space-y-6 mb-16">
-            <h1 class="text-5xl md:text-7xl font-medium leading-[1.1] shimmer-text">
-                Maximize suas férias <br>
-                <span class="text-gradient">de forma inteligente</span>
-            </h1>
-            <p class="text-white/40 max-w-xl mx-auto text-lg font-light leading-relaxed">
-                Otimizamos o seu calendário para você aproveitar feriados e finais de semana para esticar suas férias
-                sem gastar dias extras.
-            </p>
-        </section>
-
-        <!-- Multi-step Multi-step Container -->
-        <div id="app-container" class="space-y-10">
-            <!-- Step 1: Configuration -->
-            <div id="step-1" class="glass-card rounded-2xl p-10 space-y-8">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="w-10 h-10 rounded-full bg-[#00BFA5]/10 flex items-center justify-center text-[#00BFA5] text-xs font-medium tracking-widest">
-                        01</div>
-                    <h3 class="text-xl font-medium">Configuração do Período</h3>
+                    <button id="btn-next-1"
+                        class="w-full glass-btn btn-primary py-5 text-[11px] uppercase tracking-[0.2em]">
+                        Iniciar Planejamento
+                    </button>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Início do
-                            Período</label>
-                        <input type="date" id="input-start" class="w-full">
-                    </div>
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Fim do
-                            Período</label>
-                        <input type="date" id="input-end" class="w-full">
-                    </div>
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Estado</label>
-                        <select id="select-state" class="w-full">
-                            <option value="">Selecione...</option>
-                        </select>
-                    </div>
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Cidade</label>
-                        <select id="select-city" class="w-full">
-                            <option value="">Selecione o estado primeiro...</option>
-                        </select>
-                    </div>
-                    <div class="space-y-4 md:col-span-2">
-                        <div class="flex justify-between items-center">
-                            <label class="text-[10px] font-medium text-white/30 uppercase tracking-[0.2em]">Saldo de
-                                Férias</label>
-                            <span id="days-value" class="text-xl font-medium text-[#00BFA5]">30</span>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <input id="input-days" type="range" min="5" max="30" value="30" class="w-full">
-                        </div>
-                        <p id="clt-warning"
-                            class="text-[10px] text-[#b51212] font-medium hidden mt-4 animate-fade-in text-center bg-[#b51212]/5 py-3 px-4 rounded-xl border border-[#b51212]/10 uppercase tracking-widest">
-                            Pela CLT você só pode vender no máximo 10 dias!
-                        </p>
-                        <p id="partial-sale-warning"
-                            class="text-[10px] text-[#00BFA5] font-medium hidden mt-4 animate-fade-in text-center bg-[#00BFA5]/5 py-3 px-4 rounded-xl border border-[#00BFA5]/10 uppercase tracking-widest leading-relaxed">
-                            Algumas empresas não permitem a venda parcial, verifique com seu RH antes de planejar!
-                        </p>
-                    </div>
+                <!-- Step 2: Manage Holidays (Hidden initially) -->
+                <div id="step-2" class="hidden glass-card rounded-2xl p-10 space-y-8">
+                    <!-- Logic for Step 2 -->
                 </div>
 
-                <button id="btn-next-1"
-                    class="w-full glass-btn btn-primary py-5 text-[11px] uppercase tracking-[0.2em]">
-                    Iniciar Planejamento
-                </button>
+                <!-- Step 3: Suggestions (Hidden initially) -->
+                <div id="step-3" class="hidden space-y-8">
+                    <!-- Results -->
+                </div>
             </div>
+        </main>
 
-            <!-- Step 2: Manage Holidays (Hidden initially) -->
-            <div id="step-2" class="hidden glass-card rounded-2xl p-10 space-y-8">
-                <!-- Logic for Step 2 -->
+        <footer class="footer-minimalist">
+            <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                <p class="text-[10px] text-white/20 uppercase tracking-[0.2em]">© 2024 Estica Férias. Todos os
+                    direitos reservados.</p>
+                <nav class="flex gap-8">
+                    <a href="metodologia.html" class="footer-link">Metodologia</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="privacidade.html" class="footer-link">Privacidade</a>
+                    <a href="termos.html" class="footer-link">Termos</a>
+                </nav>
             </div>
-
-            <!-- Step 3: Suggestions (Hidden initially) -->
-            <div id="step-3" class="hidden space-y-8">
-                <!-- Results -->
-            </div>
-        </div>
-    </main>
-
-    <footer class="footer-minimalist">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <p class="text-[10px] text-white/20 uppercase tracking-[0.2em]">© 2024 Estica Férias. Todos os direitos
-                reservados.</p>
-
-            <nav class="flex gap-8">
-                <a href="privacidade.html" class="footer-link">Privacidade</a>
-                <a href="termos.html" class="footer-link">Termos</a>
-            </nav>
-        </div>
-    </footer>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu">
-        <button id="close-mobile-menu" class="absolute top-8 right-8 text-white/60 hover:text-white transition-colors">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <nav class="flex flex-col items-center">
-            <a href="index.html" class="mobile-nav-link active">Início</a>
-            <a href="metodologia.html" class="mobile-nav-link">Metodologia</a>
-            <a href="faq.html" class="mobile-nav-link">FAQ</a>
-        </nav>
+        </footer>
     </div>
 
     <!-- App Logic -->
     <script type="module" src="app.js"></script>
     <script>
-        // Init Lucide Icons
         lucide.createIcons();
     </script>
 </body>

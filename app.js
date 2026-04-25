@@ -1,24 +1,38 @@
 import * as logic from './logic.js';
 
+// --- Step Header ---
+function updateStepHeader(step) {
+    [1, 2, 3].forEach(i => {
+        const bar = document.getElementById(`bar-${i}`);
+        if (!bar) return;
+        bar.classList.toggle('active', i <= step);
+    });
+}
+
 // --- Welcome Screen ---
 (function setupWelcome() {
     const screen = document.getElementById('welcome-screen');
-    const cta = document.getElementById('welcome-cta');
-    const orb = document.getElementById('welcome-orb');
+    const cta    = document.getElementById('welcome-cta');
+    const orb    = document.getElementById('welcome-orb');
+    const appBody = document.getElementById('app-body');
 
-    if (!screen || !cta) return;
+    if (!screen || !cta || !appBody) return;
 
+    // Mouse → orb tracking (only while welcome is visible)
     document.addEventListener('mousemove', (e) => {
         if (screen.classList.contains('fade-out')) return;
         orb.style.left = `${(e.clientX / window.innerWidth) * 100}%`;
-        orb.style.top = `${(e.clientY / window.innerHeight) * 100}%`;
+        orb.style.top  = `${(e.clientY / window.innerHeight) * 100}%`;
     });
 
     cta.addEventListener('click', () => {
         screen.classList.add('fade-out');
         setTimeout(() => {
             screen.style.display = 'none';
-        }, 500);
+            appBody.classList.remove('app-body-hidden');
+            appBody.classList.add('app-body-visible');
+            updateStepHeader(1);
+        }, 450);
     });
 })();
 
@@ -96,16 +110,8 @@ function setYmd(input, date) {
     input.value = logic.toYmd(date);
 }
 
-function toggleHero(visible) {
-    const hero = document.getElementById('hero-section');
-    if (visible) {
-        hero.classList.remove('hidden');
-        setTimeout(() => hero.classList.remove('fade-out'), 10);
-    } else {
-        hero.classList.add('fade-out');
-        setTimeout(() => hero.classList.add('hidden'), 600);
-    }
-}
+// Hero section was removed — welcome screen handles the landing presentation.
+function toggleHero() {}
 
 function populateStates() {
     const selector = document.getElementById('select-state');
@@ -242,6 +248,7 @@ async function goToStep2() {
 
     state.step = 2;
     toggleHero(false);
+    updateStepHeader(2);
     renderStep2();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -287,6 +294,7 @@ function renderStep2() {
     document.getElementById('btn-back-2').onclick = () => {
         state.step = 1;
         toggleHero(true);
+        updateStepHeader(1);
         document.getElementById('step-2').classList.add('hidden');
         document.getElementById('step-1').classList.remove('hidden');
     };
@@ -308,6 +316,7 @@ function renderStep2() {
 
 function goToStep3() {
     state.step = 3;
+    updateStepHeader(3);
     renderStep3();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -511,6 +520,7 @@ function renderStep3() {
     document.getElementById('btn-restart').onclick = () => {
         state.step = 1;
         toggleHero(true);
+        updateStepHeader(1);
         state.selectedOps = [];
         state.saldo = 30;
         document.getElementById('step-3').classList.add('hidden');
