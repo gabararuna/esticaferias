@@ -2,31 +2,31 @@
 <!-- Atualize o domínio base antes de publicar o sitemap -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://esticaferias.com.br/</loc>
+    <loc>https://esticaferias.gruponumera.com/</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://esticaferias.com.br/faq.html</loc>
+    <loc>https://esticaferias.gruponumera.com/faq.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://esticaferias.com.br/metodologia.html</loc>
+    <loc>https://esticaferias.gruponumera.com/metodologia.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esticaferias.com.br/privacidade.html</loc>
+    <loc>https://esticaferias.gruponumera.com/privacidade.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://esticaferias.com.br/termos.html</loc>
+    <loc>https://esticaferias.gruponumera.com/termos.html</loc>
     <lastmod>2026-05-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
