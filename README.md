@@ -1,29 +1,54 @@
-# Estica Férias Web (Native)
+# Estica Férias
 
-Versão nativa e modernizada do aplicativo "Estica Férias", otimizada para performance, SEO e AdSense.
+Calculadora web que indica os melhores períodos para tirar férias com base nos feriados nacionais, estaduais e municipais e nos fins de semana — maximizando os dias de descanso real.
 
-## ✨ Destaques
-- **Design Premium**: Interface baseada em glassmorphism, tipografia moderna (Outfit/Inter) e gradientes fluidos.
-- **Mobile-First**: Experiência perfeita em dispositivos móveis.
-- **Ultra-Leve**: Construído em Vanilla JS/CSS com Tailwind, sem dependências pesadas de framework.
-- **Pronto para Cloudflare**: Deploy instantâneo no Cloudflare Pages.
-- **AdSense Ready**: Slots estrategicamente posicionados para monetização.
+**Demo:** [esticaferias.com.br](https://esticaferias.com.br)
 
-## 🚀 Como Executar
-Devido ao uso de módulos JavaScript e `fetch`, você precisará de um servidor local simples:
+## Funcionalidades
+
+- Seleção por estado e município com base de feriados municipais completa
+- Cálculo automático dos períodos que rendem mais dias de folga
+- Suporte a múltiplos idiomas (Português, Inglês, Espanhol)
+- Páginas explicativas de metodologia e FAQ
+- Sem dependências externas — 100% vanilla HTML/CSS/JS
+- Compatível com Google AdSense
+- Design glassmorphism mobile-first
+
+## Stack
+
+- HTML5 + CSS3 + JavaScript puro (sem framework, sem build tool)
+- Dados: `cidades.json` + `feriados_municipais.json`
+
+## Como rodar
+
+Projeto estático — basta servir com qualquer servidor HTTP:
 
 ```bash
-# Se tiver npx/node
-npx serve .
+# Com Python
+python3 -m http.server 8080
 
-# Ou usando Python
-python -m http.server 8000
+# Com Node.js (npx)
+npx serve .
 ```
 
-## 📂 Estrutura do Projeto
-- `index.html`: Estrutura principal e SEO.
-- `style.css`: Design system e animações.
-- `app.js`: Lógica de interface e orquestração.
-- `logic.js`: Algoritmo de cálculo de férias (Portado do Python).
-- `cidades.json`: Banco de dados de municípios.
-- `feriados_municipais.json`: Banco de dados de feriados regionais.
+## Estrutura de arquivos
+
+| Arquivo | Descrição |
+|---------|-----------|
+| `index.html` | Calculadora principal |
+| `faq.html` | Perguntas frequentes |
+| `metodologia.html` | Como o cálculo funciona |
+| `privacidade.html` | Política de privacidade |
+| `termos.html` | Termos de uso |
+| `app.js` | Lógica de interface e orquestração |
+| `logic.js` | Algoritmo de cálculo de férias |
+| `cidades.json` | Base de dados de municípios brasileiros |
+| `feriados_municipais.json` | Base de dados de feriados regionais |
+
+## SEO
+
+Inclui `robots.txt` e `sitemap.xml`. Submeta o sitemap no [Google Search Console](https://search.google.com/search-console) após publicar. Atualize o domínio no `sitemap.xml` antes do deploy.
+
+## Licença
+
+MIT
