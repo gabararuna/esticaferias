@@ -32,6 +32,9 @@ function updateStepHeader(step) {
             appBody.classList.remove('app-body-hidden');
             appBody.classList.add('app-body-visible');
             updateStepHeader(1);
+            document.querySelectorAll('#app-body .adsbygoogle').forEach(function() {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            });
         }, 450);
     });
 })();
